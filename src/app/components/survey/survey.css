@@ -1,0 +1,169 @@
+/* --- Fondo de la página --- */
+.survey-page {
+  background-color: #f3f4f6; /* Fondo gris muy suave */
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- Tarjeta del Formulario --- */
+.survey-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 3rem;
+  border-top: 8px solid #007bff; /* Línea decorativa superior */
+}
+
+/* --- Títulos Principales --- */
+.survey-main-title {
+  font-size: 2rem;
+  color: #111827;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.survey-subtitle {
+  color: #6b7280;
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+}
+
+/* --- Separador de Sección --- */
+.section-divider {
+  margin: 3rem 0 2rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.section-divider h2 {
+  font-size: 1.25rem;
+  color: #007bff;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* --- Grupos de Preguntas --- */
+.question-group {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.question-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+
+/* --- Contenedor de Opciones --- */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Si quieres que algunas opciones salgan en 2 columnas en PC */
+.grid-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* --- Estilo de las Opciones (Radio Buttons) --- */
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #4b5563;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.option-label:hover {
+  color: #000000;
+}
+
+.option-label input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: #007bff; /* Pinta el radio button del color de tu tema */
+}
+
+/* --- Opción "Otra" con Input de texto --- */
+.option-label-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  grid-column: 1 / -1; /* Ocupa toda la fila en el grid */
+}
+
+.input-text {
+  flex: 1;
+  max-width: 300px;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-text:focus {
+  border-color: #007bff;
+}
+
+/* --- Botón Enviar --- */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.btn-submit {
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem 3rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* --- Responsive (Mobile View) --- */
+@media (max-width: 768px) {
+  .survey-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .grid-options {
+    grid-template-columns: 1fr; /* Una sola columna en móvil */
+  }
+
+  .question-group {
+    padding: 1rem;
+  }
+
+  .btn-submit {
+    width: 100%; /* Botón ancho completo en móvil */
+  }
+}

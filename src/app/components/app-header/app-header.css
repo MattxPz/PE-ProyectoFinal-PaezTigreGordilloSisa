@@ -1,0 +1,105 @@
+/* --- Estilos Generales del Header --- */
+.custom-header {
+  width: 100%;
+  background-color: #ffffff; /* Puedes ajustarlo a tu paleta (ej. #f8f9fa) */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave (shadow-sm) */
+  border-radius: 8px; /* Bordes redondeados (rounded-md) */
+  position: relative;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+/* --- Estilos de la Marca (Brand) --- */
+.brand {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600;
+  text-decoration: none;
+  color: #333333;
+}
+
+/* --- Control del Menú (Checkbox oculto) --- */
+.navbar-toggle-checkbox {
+  display: none;
+}
+
+/* --- Icono Hamburguesa --- */
+.hamburger-btn {
+  display: none; /* Oculto en PC */
+  cursor: pointer;
+  color: #333333;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* --- Menú de Navegación (Desktop) --- */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #555555;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Clase que inyecta Angular cuando la ruta está activa */
+.nav-menu a.active {
+  color: #007bff; /* Color primario, cámbialo según tu diseño */
+  font-weight: bold;
+}
+
+/* --- Responsive (Mobile View) --- */
+@media (max-width: 1024px) { /* Breakpoint similar a lg en Tailwind */
+  
+  .hamburger-btn {
+    display: block; /* Mostramos la hamburguesa */
+  }
+
+  .nav-menu {
+    display: none; /* Ocultamos los enlaces por defecto */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    border-radius: 0 0 8px 8px;
+    z-index: 50; /* Para asegurar que flote sobre otros componentes */
+  }
+
+  .nav-menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 1rem;
+  }
+
+  /* La magia: Cuando el checkbox está "checked", mostramos el menú */
+  .navbar-toggle-checkbox:checked ~ .nav-menu {
+    display: flex;
+  }
+}

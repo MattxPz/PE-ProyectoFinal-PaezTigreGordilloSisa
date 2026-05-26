@@ -1,0 +1,45 @@
+<header class="custom-header">
+  <nav class="navbar">
+    
+    <a class="brand" routerLink="/">
+      {{ brand() | uppercase }}
+    </a>
+
+    <input type="checkbox" id="navbar-toggle" class="navbar-toggle-checkbox" />
+
+    <label for="navbar-toggle" class="hamburger-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+      </svg>
+    </label>
+
+    <ul class="nav-menu">
+      <li>
+        <a 
+          routerLink="/" 
+          routerLinkActive="active" 
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Home Page
+        </a>
+      </li>
+      <li>
+        <a 
+          routerLink="/survey" 
+          routerLinkActive="active"
+        >
+          Survey
+        </a>
+      </li>
+      <li>
+        <a 
+          routerLink="/dashboard" 
+          routerLinkActive="active"
+        >
+          Dashboard
+        </a>
+      </li>
+    </ul>
+
+  </nav>
+</header>

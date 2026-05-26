@@ -1,0 +1,123 @@
+/* --- Contenedor Principal (Hero) --- */
+.custom-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; /* Ocupa una buena parte de la pantalla visible */
+  background: linear-gradient(135deg, #f0f4f8 0%, #e0eaf5 100%); /* Degradado suave */
+  padding: 4rem 1.5rem;
+}
+
+/* --- Tarjeta de Contenido --- */
+.hero-content {
+  max-width: 900px;
+  background-color: #ffffff;
+  padding: 3rem 4rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra elegante */
+  text-align: center;
+}
+
+/* --- Tipografía --- */
+.hero-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827; /* Gris muy oscuro */
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #4b5563; /* Gris medio */
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* --- Elementos a Comparar (Tags) --- */
+.hero-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 2.5rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hero-tags li {
+  background-color: #e5e7eb; /* Fondo gris claro */
+  color: #374151;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px; /* Bordes redondeados estilo píldora */
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.hero-tags li:hover {
+  background-color: #d1d5db; /* Oscurece un poco al pasar el mouse */
+}
+
+/* --- Botón Principal --- */
+.btn-primary {
+  display: inline-block;
+  background-color: #007bff; /* Color primario azul */
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Azul más oscuro en hover */
+  transform: translateY(-2px); /* Pequeño salto hacia arriba */
+}
+
+/* --- Responsive (Mobile View) --- */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .hero-tags {
+    gap: 0.6rem;
+  }
+  
+  .hero-tags li {
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .btn-primary {
+  display: inline-block;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  
+  /* Añadido para resetear el estilo por defecto del <button> */
+  border: none;
+  cursor: pointer;
+  font-family: inherit; /* Para que use la misma fuente de tu página */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+}
+

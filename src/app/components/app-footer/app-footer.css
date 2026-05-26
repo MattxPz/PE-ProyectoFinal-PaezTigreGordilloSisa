@@ -1,0 +1,85 @@
+/* --- Contenedor Principal del Footer --- */
+.custom-footer {
+  background-color: #f8f9fa; /* Un gris muy claro para diferenciarlo del cuerpo de la página */
+  color: #333333;
+  padding: 3rem 1.5rem 1rem;
+  border-top: 1px solid #e5e7eb; /* Línea sutil en la parte superior */
+  margin-top: auto; /* Ayuda a empujar el footer al fondo si usas flex/grid en el contenedor padre */
+}
+
+/* --- Layout en Columnas (Flexbox) --- */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto; /* Centra el contenido en pantallas muy anchas */
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 250px; /* Evita que las columnas se aplasten demasiado en pantallas medianas */
+}
+
+/* --- Tipografía y Títulos --- */
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111827; /* Casi negro */
+}
+
+.footer-text {
+  color: #555555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- Listas (Creadores y Enlaces) --- */
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-list li {
+  margin-bottom: 0.6rem;
+  color: #555555;
+}
+
+.footer-list a {
+  text-decoration: none;
+  color: #555555;
+  transition: color 0.3s ease;
+}
+
+/* Efecto hover coincidente con el header */
+.footer-list a:hover {
+  color: #007bff; /* Color primario azul */
+  text-decoration: underline;
+}
+
+/* --- Barra Inferior (Copyright) --- */
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  color: #777777;
+  font-size: 0.9rem;
+}
+
+/* --- Responsive (Mobile View) --- */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  /* Centrar textos en móviles suele verse más ordenado */
+  .footer-col, 
+  .footer-bottom {
+    text-align: center;
+  }
+}
