@@ -1,13 +1,192 @@
 <div class="survey-page">
   <div class="survey-card">
-    <h1 class="survey-main-title">Impacto de la IA en Hábitos de Estudio</h1>
-    <p class="survey-subtitle">Por favor, responde con sinceridad. Tus datos son anónimos.</p>
+    <h1 class="survey-main-title">Impacto del uso de herramientas de Inteligencia Artificial en el desgaste académico universitario</h1>
+    <p class="survey-subtitle">La información será utilizada únicamente con fines académicos y estadísticos. Por favor, responde con sinceridad.</p>
 
     <form class="survey-form">
-      
-      <!-- PREGUNTA SIN NÚMERO -->
+
+      <div class="section-divider">
+        <h2>SECCIÓN 1 - INFORMACIÓN GENERAL</h2>
+      </div>
+
       <div class="question-group">
-        <p class="question-text">¿1. Con qué frecuencia siente agotamiento académico?</p>
+        <p class="question-text">1. Edad</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="edad" value="Menor de 18 años"> Menor de 18 años</label>
+          <label class="option-label"><input type="radio" name="edad" value="18-20 años"> 18-20 años</label>
+          <label class="option-label"><input type="radio" name="edad" value="21-23 años"> 21-23 años</label>
+          <label class="option-label"><input type="radio" name="edad" value="24-26 años"> 24-26 años</label>
+          <label class="option-label"><input type="radio" name="edad" value="Mayor de 26 años"> Mayor de 26 años</label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">2. Género</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="genero" value="Masculino"> Masculino</label>
+          <label class="option-label"><input type="radio" name="genero" value="Femenino"> Femenino</label>
+          <label class="option-label"><input type="radio" name="genero" value="Prefiero no responder"> Prefiero no responder</label>
+        </div>
+      </div>
+
+
+
+      <div class="question-group">
+        <p class="question-text">3. Carrera universitaria</p>
+        <div class="options-container">
+          <input type="text" class="input-text" name="carrera" placeholder="Especifique su carrera...">
+        </div>
+      </div>
+
+
+
+      
+      <div class="question-group">
+        <p class="question-text">4. Nivel o semestre actual</p>
+        <div class="options-container">
+          <input type="text" class="input-text" name="semestre" placeholder="Especifique su semestre o nivel...">
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">5. Situación actual</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="situacion" value="Solo estudio"> Solo estudio</label>
+          <label class="option-label"><input type="radio" name="situacion" value="Estudio y trabajo"> Estudio y trabajo</label>
+          <label class="option-label"><input type="radio" name="situacion" value="Solo trabajo"> Solo trabajo</label>
+          <div class="option-label-inline">
+            <label><input type="radio" name="situacion" value="Otra"> Otra:</label>
+            <input type="text" class="input-text" placeholder="Especifique...">
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider">
+        <h2>SECCIÓN 2 - DISTRIBUCIÓN DEL TIEMPO</h2>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">6. ¿Cuántas horas al día dedica aproximadamente al estudio?</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="horas_estudio" value="Menos de 1 hora"> Menos de 1 hora</label>
+          <label class="option-label"><input type="radio" name="horas_estudio" value="1-2 horas"> 1-2 horas</label>
+          <label class="option-label"><input type="radio" name="horas_estudio" value="3-4 horas"> 3-4 horas</label>
+          <label class="option-label"><input type="radio" name="horas_estudio" value="5-6 horas"> 5-6 horas</label>
+          <label class="option-label"><input type="radio" name="horas_estudio" value="Más de 6 horas"> Más de 6 horas</label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">7. ¿Cuántas horas al día dedica al trabajo?</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="horas_trabajo" value="No trabajo"> No trabajo</label>
+          <label class="option-label"><input type="radio" name="horas_trabajo" value="1-3 horas"> 1-3 horas</label>
+          <label class="option-label"><input type="radio" name="horas_trabajo" value="4-6 horas"> 4-6 horas</label>
+          <label class="option-label"><input type="radio" name="horas_trabajo" value="7-8 horas"> 7-8 horas</label>
+          <label class="option-label"><input type="radio" name="horas_trabajo" value="Más de 8 horas"> Más de 8 horas</label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">8. ¿Cuántas horas al día dedica al ocio o entretenimiento?</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="horas_ocio" value="Menos de 1 hora"> Menos de 1 hora</label>
+          <label class="option-label"><input type="radio" name="horas_ocio" value="1-2 horas"> 1-2 horas</label>
+          <label class="option-label"><input type="radio" name="horas_ocio" value="3-4 horas"> 3-4 horas</label>
+          <label class="option-label"><input type="radio" name="horas_ocio" value="Más de 4 horas"> Más de 4 horas</label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">9. ¿Cuántas horas duerme aproximadamente al día?</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="horas_sueno" value="Menos de 4 horas"> Menos de 4 horas</label>
+          <label class="option-label"><input type="radio" name="horas_sueno" value="4-5 horas"> 4-5 horas</label>
+          <label class="option-label"><input type="radio" name="horas_sueno" value="6-7 horas"> 6-7 horas</label>
+          <label class="option-label"><input type="radio" name="horas_sueno" value="8 horas o más"> 8 horas o más</label>
+        </div>
+      </div>
+
+      <div class="section-divider">
+        <h2>SECCIÓN 3 - USO DE HERRAMIENTAS DE IA</h2>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">10. ¿Utiliza herramientas de Inteligencia Artificial para actividades académicas?</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="utiliza_ia" value="Sí"> Sí</label>
+          <label class="option-label"><input type="radio" name="utiliza_ia" value="No"> No</label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">11. ¿Con qué frecuencia utiliza herramientas de IA?</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Nunca"> Nunca</label>
+          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Rara vez"> Rara vez</label>
+          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Algunas veces por semana"> Algunas veces por semana</label>
+          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Casi todos los días"> Casi todos los días</label>
+          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Todos los días"> Todos los días</label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">12. ¿Qué herramientas de IA utiliza con mayor frecuencia? (Puede seleccionar varias opciones)</p>
+        <div class="options-container grid-options">
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="ChatGPT"> ChatGPT</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Gemini"> Gemini</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Claude"> Claude</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Copilot"> Copilot</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="MidJourney"> MidJourney</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Canva AI"> Canva AI</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Notion AI"> Notion AI</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="DeepSeek"> DeepSeek</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Suno AI"> Suno AI</label>
+          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Gamma AI"> Gamma AI</label>
+          <div class="option-label-inline">
+            <label><input type="checkbox" name="herramientas_ia" value="Otra"> Otra:</label>
+            <input type="text" class="input-text" placeholder="Especifique...">
+          </div>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">13. ¿Para qué utiliza principalmente herramientas de IA? (Puede seleccionar varias opciones)</p>
+        <div class="options-container grid-options">
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Resúmenes"> Resúmenes</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Investigación"> Investigación</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Programación"> Programación</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Generación de texto"> Generación de texto</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Presentaciones"> Presentaciones</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Generación de imágenes"> Generación de imágenes</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Música"> Música</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Resolución de tareas"> Resolución de tareas</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Explicación de temas"> Explicación de temas</label>
+          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Traducción"> Traducción</label>
+          <div class="option-label-inline">
+            <label><input type="checkbox" name="proposito_ia" value="Otra"> Otra:</label>
+            <input type="text" class="input-text" placeholder="Especifique...">
+          </div>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">14. ¿Considera que el uso de IA le ayuda a ahorrar tiempo académico?</p>
+        <div class="options-container">
+          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="1"> Totalmente en desacuerdo</label>
+          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="2"> En desacuerdo</label>
+          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="3"> Neutral</label>
+          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="4"> De acuerdo</label>
+          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="5"> Totalmente de acuerdo</label>
+        </div>
+      </div>
+
+      <div class="section-divider">
+        <h2>SECCIÓN 4 - DESGASTE ACADÉMICO</h2>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">15. ¿Con qué frecuencia siente agotamiento académico?</p>
         <div class="options-container">
           <label class="option-label"><input type="radio" name="agotamiento" value="Nunca"> Nunca</label>
           <label class="option-label"><input type="radio" name="agotamiento" value="Rara vez"> Rara vez</label>
@@ -17,9 +196,8 @@
         </div>
       </div>
 
-      <!-- PREGUNTA 16 -->
       <div class="question-group">
-        <p class="question-text">2. ¿Considera que la carga académica afecta su salud emocional?</p>
+        <p class="question-text">16. ¿Considera que la carga académica afecta su salud emocional?</p>
         <div class="options-container">
           <label class="option-label"><input type="radio" name="salud_emocional" value="1"> Totalmente en desacuerdo</label>
           <label class="option-label"><input type="radio" name="salud_emocional" value="2"> En desacuerdo</label>
@@ -29,9 +207,8 @@
         </div>
       </div>
 
-      <!-- PREGUNTA 17 -->
       <div class="question-group">
-        <p class="question-text">3. ¿Considera que el uso de IA reduce su nivel de estrés académico?</p>
+        <p class="question-text">17. ¿Considera que el uso de IA reduce su nivel de estrés académico?</p>
         <div class="options-container">
           <label class="option-label"><input type="radio" name="estres_ia" value="1"> Totalmente en desacuerdo</label>
           <label class="option-label"><input type="radio" name="estres_ia" value="2"> En desacuerdo</label>
@@ -41,9 +218,8 @@
         </div>
       </div>
 
-      <!-- PREGUNTA 18 -->
       <div class="question-group">
-        <p class="question-text">4. ¿El uso de IA le ayuda a comprender mejor ciertos temas?</p>
+        <p class="question-text">18. ¿El uso de IA le ayuda a comprender mejor ciertos temas?</p>
         <div class="options-container">
           <label class="option-label"><input type="radio" name="comprension_ia" value="Nunca"> Nunca</label>
           <label class="option-label"><input type="radio" name="comprension_ia" value="Rara vez"> Rara vez</label>
@@ -53,9 +229,8 @@
         </div>
       </div>
 
-      <!-- PREGUNTA 19 -->
       <div class="question-group">
-        <p class="question-text">5. ¿Considera que el uso excesivo de IA puede generar dependencia académica?</p>
+        <p class="question-text">19. ¿Considera que el uso excesivo de IA puede generar dependencia académica?</p>
         <div class="options-container">
           <label class="option-label"><input type="radio" name="dependencia" value="Sí"> Sí</label>
           <label class="option-label"><input type="radio" name="dependencia" value="No"> No</label>
@@ -63,14 +238,12 @@
         </div>
       </div>
 
-      <!-- SECCIÓN 5 -->
       <div class="section-divider">
-        <h2>SECCIÓN — ANÁLISIS COMPARATIVO</h2>
+        <h2>SECCIÓN 5 - ANÁLISIS COMPARATIVO</h2>
       </div>
 
-      <!-- PREGUNTA 20 -->
       <div class="question-group">
-        <p class="question-text">6. ¿Qué área académica considera que utiliza más herramientas de IA?</p>
+        <p class="question-text">20. ¿Qué área académica considera que utiliza más herramientas de IA?</p>
         <div class="options-container grid-options">
           <label class="option-label"><input type="radio" name="area_academica" value="Ingenierías"> Ingenierías</label>
           <label class="option-label"><input type="radio" name="area_academica" value="Diseño y Multimedia"> Diseño y Multimedia</label>
@@ -78,7 +251,6 @@
           <label class="option-label"><input type="radio" name="area_academica" value="Medicina"> Medicina</label>
           <label class="option-label"><input type="radio" name="area_academica" value="Administración"> Administración</label>
           <label class="option-label"><input type="radio" name="area_academica" value="Arquitectura"> Arquitectura</label>
-          
           <div class="option-label-inline">
             <label><input type="radio" name="area_academica" value="Otra"> Otra:</label>
             <input type="text" class="input-text" placeholder="Especifique su área...">
@@ -86,9 +258,8 @@
         </div>
       </div>
 
-      <!-- PREGUNTA 21 -->
       <div class="question-group">
-        <p class="question-text">7. ¿Considera que la IA mejora su productividad académica?</p>
+        <p class="question-text">21. ¿Considera que la IA mejora su productividad académica?</p>
         <div class="options-container">
           <label class="option-label"><input type="radio" name="productividad" value="1"> Totalmente en desacuerdo</label>
           <label class="option-label"><input type="radio" name="productividad" value="2"> En desacuerdo</label>
@@ -98,9 +269,8 @@
         </div>
       </div>
 
-      <!-- PREGUNTA 22 -->
       <div class="question-group">
-        <p class="question-text">8. ¿Considera que actualmente las universidades deberían integrar oficialmente herramientas de IA en la enseñanza?</p>
+        <p class="question-text">22. ¿Considera que actualmente las universidades deberían integrar oficialmente herramientas de IA en la enseñanza?</p>
         <div class="options-container">
           <label class="option-label"><input type="radio" name="integrar_ia" value="Sí"> Sí</label>
           <label class="option-label"><input type="radio" name="integrar_ia" value="No"> No</label>
@@ -108,7 +278,49 @@
         </div>
       </div>
 
-      <!-- BOTÓN ENVIAR -->
+      <div class="question-group">
+        <p class="question-text">23. ¿Qué aspecto considera más positivo del uso de IA?</p>
+        <div class="options-container grid-options">
+          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Ahorro de tiempo"> Ahorro de tiempo</label>
+          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Mayor comprensión"> Mayor comprensión</label>
+          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Automatización de tareas"> Automatización de tareas</label>
+          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Creatividad"> Creatividad</label>
+          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Apoyo en programación"> Apoyo en programación</label>
+          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Generación rápida de contenido"> Generación rápida de contenido</label>
+          <div class="option-label-inline">
+            <label><input type="radio" name="aspecto_positivo" value="Otra"> Otra:</label>
+            <input type="text" class="input-text" placeholder="Especifique...">
+          </div>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">24. ¿Qué aspecto considera más negativo del uso de IA?</p>
+        <div class="options-container grid-options">
+          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Dependencia"> Dependencia</label>
+          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Menor razonamiento"> Menor razonamiento</label>
+          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Información incorrecta"> Información incorrecta</label>
+          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Plagio académico"> Plagio académico</label>
+          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Menor esfuerzo personal"> Menor esfuerzo personal</label>
+          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Distracción"> Distracción</label>
+          <div class="option-label-inline">
+            <label><input type="radio" name="aspecto_negativo" value="Otra"> Otra:</label>
+            <input type="text" class="input-text" placeholder="Especifique...">
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider">
+        <h2>SECCIÓN 6 - PREGUNTA ABIERTA</h2>
+      </div>
+
+      <div class="question-group">
+        <p class="question-text">25. Desde su experiencia personal, ¿cómo considera que la Inteligencia Artificial ha influido en su vida académica?</p>
+        <div class="options-container">
+          <textarea class="input-textarea" name="experiencia_abierta" placeholder="Escriba su respuesta aquí..."></textarea>
+        </div>
+      </div>
+
       <div class="form-actions">
         <button type="button" (click)="submitSurvey()" class="btn-submit">
           Enviar respuestas
