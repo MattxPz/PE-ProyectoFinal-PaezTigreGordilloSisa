@@ -14,11 +14,42 @@ export class Survey {
 
   private router = inject(Router);
 
-  // Método que simula el envío y redirige
+  // Variables conectadas al HTML mediante Angular
+  situacionSeleccionada: string = '';
+  otraSituacionTexto: string = '';
+
+  // Método para limpiar el texto si el usuario se arrepiente y elige otra opción
+  onSituacionChange() {
+    if (this.situacionSeleccionada !== 'Otra') {
+      this.otraSituacionTexto = '';
+    }
+  }
+
   submitSurvey() {
-    // Aquí a futuro irá la lógica para guardar las respuestas en tu backend
+    // Aquí a futuro irá la lógica para guardar las respuestas
     console.log('Encuesta enviada, redirigiendo...');
     this.router.navigate(['/dashboard']);
   }
 
+  // Variables para la Pregunta 12 (Herramientas IA)
+  isOtraHerramienta: boolean = false;
+  otraHerramientaTexto: string = '';
+
+  onOtraHerramientaChange() {
+    // Si el usuario desmarca la casilla, limpiamos el texto
+    if (!this.isOtraHerramienta) {
+      this.otraHerramientaTexto = '';
+    }
+  }
+
+  // Variables para la Pregunta 13 (Propósitos IA)
+  isOtroProposito: boolean = false;
+  otroPropositoTexto: string = '';
+
+  onOtroPropositoChange() {
+    // Si el usuario desmarca la casilla, limpiamos el texto
+    if (!this.isOtroProposito) {
+      this.otroPropositoTexto = '';
+    }
+  }
 }

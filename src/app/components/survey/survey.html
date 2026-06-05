@@ -30,34 +30,123 @@
       </div>
 
 
-
       <div class="question-group">
         <p class="question-text">3. Carrera universitaria</p>
         <div class="options-container">
-          <input type="text" class="input-text" name="carrera" placeholder="Especifique su carrera...">
+          <input type="text" class="input-text" name="carrera" list="carreras-list" placeholder="Busque o seleccione su carrera...">
+          
+          <datalist id="carreras-list">
+            <option value="Administracion de Empresas"></option>
+            <option value="Agricultura"></option>
+            <option value="Alimentos"></option>
+            <option value="Antropologia"></option>
+            <option value="Arquitectura"></option>
+            <option value="Biomedicina"></option>
+            <option value="Bioquimica y Farmacia"></option>
+            <option value="Biotecnologia"></option>
+            <option value="Ciencia de Datos"></option>
+            <option value="Ciencias Politicas"></option>
+            <option value="Comercio Exterior"></option>
+            <option value="Comunicacion"></option>
+            <option value="Computacion"></option>
+            <option value="Contabilidad y Auditoria"></option>
+            <option value="Derecho"></option>
+            <option value="Diseño Multimedia"></option>
+            <option value="Economia"></option>
+            <option value="Educacion"></option>
+            <option value="Educacion Basica"></option>
+            <option value="Educacion Interultural Bilingue"></option>
+            <option value="Educacion Temprana"></option>
+            <option value="Electronica y Automatizacion"></option>
+            <option value="Enfermeria"></option>
+            <option value="Finanzas"></option>
+            <option value="Fisioterapia"></option>
+            <option value="Gestion Ambiental"></option>
+            <option value="Ingenieria Automotriz"></option>
+            <option value="Ingenieria Civil"></option>
+            <option value="Ingenieria de la Produccion"></option>
+            <option value="Ingenieria Electrica"></option>
+            <option value="Ingenieria Industrial"></option>
+            <option value="Ingenieria en Redes Inteligentes y Ciberseguridad"></option>
+            <option value="Ingenieria en Software"></option>
+            <option value="Ingenieria Mecanica"></option>
+            <option value="Marketing e Inteligencia de Mercados"></option>
+            <option value="Mecatronica"></option>
+            <option value="Medicina Veterinaria"></option>\
+            <option value="Negocios Digitales"></option>
+            <option value="Odontologia"></option>
+            <option value="Pedagogia Deportiva"></option>
+            <option value="Psicologia"></option>
+            <option value="Psicologia Clinica"></option>
+            <option value="Seguridad de la Informacion"></option>
+            <option value="Teologia"></option>
+            <option value="Trabajo Social"></option>
+          </datalist>
+
         </div>
       </div>
-
-
-
       
+
+
+
       <div class="question-group">
         <p class="question-text">4. Nivel o semestre actual</p>
+        
+        <small style="display: block; margin-bottom: 10px; color: #666; font-size: 0.85em;">
+          *Nota: Seleccione el ciclo de la materia de nivel más bajo que curse actualmente.
+        </small>
+
         <div class="options-container">
-          <input type="text" class="input-text" name="semestre" placeholder="Especifique su semestre o nivel...">
+          <select class="input-text" name="semestre">
+            <option value="" disabled selected>Seleccione su ciclo...</option>
+            <option value="1">1er ciclo</option>
+            <option value="2">2do ciclo</option>
+            <option value="3">3er ciclo</option>
+            <option value="4">4to ciclo</option>
+            <option value="5">5to ciclo</option>
+            <option value="6">6to ciclo</option>
+            <option value="7">7mo ciclo</option>
+            <option value="8">8vo ciclo</option>
+            <option value="9">9no ciclo</option>
+            <option value="10">10mo ciclo</option>
+          </select>
         </div>
       </div>
+
+
+
 
       <div class="question-group">
         <p class="question-text">5. Situación actual</p>
         <div class="options-container">
-          <label class="option-label"><input type="radio" name="situacion" value="Solo estudio"> Solo estudio</label>
-          <label class="option-label"><input type="radio" name="situacion" value="Estudio y trabajo"> Estudio y trabajo</label>
-          <label class="option-label"><input type="radio" name="situacion" value="Solo trabajo"> Solo trabajo</label>
+          
+          <label class="option-label">
+            <input type="radio" name="situacion" value="Solo estudio" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Solo estudio
+          </label>
+          
+          <label class="option-label">
+            <input type="radio" name="situacion" value="Estudio y trabajo" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Estudio y trabajo
+          </label>
+          
+          <label class="option-label">
+            <input type="radio" name="situacion" value="Solo trabajo" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Solo trabajo
+          </label>
+          
           <div class="option-label-inline">
-            <label><input type="radio" name="situacion" value="Otra"> Otra:</label>
-            <input type="text" class="input-text" placeholder="Especifique...">
+            <label>
+              <input type="radio" name="situacion" value="Otra" 
+                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
+            </label>
+            
+            <input type="text" class="input-text" placeholder="Especifique..."
+                  name="otraSituacionTexto"
+                  [(ngModel)]="otraSituacionTexto"
+                  [disabled]="situacionSeleccionada !== 'Otra'">
           </div>
+
         </div>
       </div>
 
@@ -133,19 +222,36 @@
       <div class="question-group">
         <p class="question-text">12. ¿Qué herramientas de IA utiliza con mayor frecuencia? (Puede seleccionar varias opciones)</p>
         <div class="options-container grid-options">
+          
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="ChatGPT"> ChatGPT</label>
+          
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Gemini"> Gemini</label>
+
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Claude"> Claude</label>
+
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Copilot"> Copilot</label>
+
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="MidJourney"> MidJourney</label>
+
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Canva AI"> Canva AI</label>
+
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Notion AI"> Notion AI</label>
+
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="DeepSeek"> DeepSeek</label>
+
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Suno AI"> Suno AI</label>
+
           <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Gamma AI"> Gamma AI</label>
+          
           <div class="option-label-inline">
-            <label><input type="checkbox" name="herramientas_ia" value="Otra"> Otra:</label>
-            <input type="text" class="input-text" placeholder="Especifique...">
+            <label>
+              <input type="checkbox" name="isOtraHerramienta" value="Otra"
+                    [(ngModel)]="isOtraHerramienta" (change)="onOtraHerramientaChange()"> Otra:
+            </label>
+            <input type="text" class="input-text" placeholder="Especifique..."
+                  name="otraHerramientaTexto"
+                  [(ngModel)]="otraHerramientaTexto"
+                  [disabled]="!isOtraHerramienta">
           </div>
         </div>
       </div>
@@ -153,19 +259,36 @@
       <div class="question-group">
         <p class="question-text">13. ¿Para qué utiliza principalmente herramientas de IA? (Puede seleccionar varias opciones)</p>
         <div class="options-container grid-options">
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Resúmenes"> Resúmenes</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Investigación"> Investigación</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Programación"> Programación</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Generación de texto"> Generación de texto</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Presentaciones"> Presentaciones</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Generación de imágenes"> Generación de imágenes</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Música"> Música</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Resolución de tareas"> Resolución de tareas</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Explicación de temas"> Explicación de temas</label>
+
           <label class="option-label"><input type="checkbox" name="proposito_ia" value="Traducción"> Traducción</label>
+
           <div class="option-label-inline">
-            <label><input type="checkbox" name="proposito_ia" value="Otra"> Otra:</label>
-            <input type="text" class="input-text" placeholder="Especifique...">
+            <label>
+              <input type="checkbox" name="isOtroProposito" value="Otra"
+                    [(ngModel)]="isOtroProposito" (change)="onOtroPropositoChange()"> Otra:
+            </label>
+            <input type="text" class="input-text" placeholder="Especifique..."
+                  name="otroPropositoTexto"
+                  [(ngModel)]="otroPropositoTexto"
+                  [disabled]="!isOtroProposito">
           </div>
         </div>
       </div>
@@ -242,21 +365,55 @@
         <h2>SECCIÓN 5 - ANÁLISIS COMPARATIVO</h2>
       </div>
 
-      <div class="question-group">
-        <p class="question-text">20. ¿Qué área académica considera que utiliza más herramientas de IA?</p>
-        <div class="options-container grid-options">
-          <label class="option-label"><input type="radio" name="area_academica" value="Ingenierías"> Ingenierías</label>
-          <label class="option-label"><input type="radio" name="area_academica" value="Diseño y Multimedia"> Diseño y Multimedia</label>
-          <label class="option-label"><input type="radio" name="area_academica" value="Ciencias Sociales"> Ciencias Sociales</label>
-          <label class="option-label"><input type="radio" name="area_academica" value="Medicina"> Medicina</label>
-          <label class="option-label"><input type="radio" name="area_academica" value="Administración"> Administración</label>
-          <label class="option-label"><input type="radio" name="area_academica" value="Arquitectura"> Arquitectura</label>
-          <div class="option-label-inline">
-            <label><input type="radio" name="area_academica" value="Otra"> Otra:</label>
-            <input type="text" class="input-text" placeholder="Especifique su área...">
-          </div>
+     <div class="question-group">
+      <p class="question-text">20. ¿Qué área académica considera que utiliza más herramientas de IA?</p>
+      <div class="options-container grid-options">
+
+        <label class="option-label">
+          <input type="radio" name="area_academica" value="Ingenierias"
+                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Ingenierías
+        </label>
+
+        <label class="option-label">
+          <input type="radio" name="area_academica" value="Diseno y Multimedia"
+                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Diseño y Multimedia
+        </label>
+
+        <label class="option-label">
+          <input type="radio" name="area_academica" value="Ciencias Sociales"
+                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Ciencias Sociales
+        </label>
+
+        <label class="option-label">
+          <input type="radio" name="area_academica" value="Medicina"
+                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Medicina
+        </label>
+
+        <label class="option-label">
+          <input type="radio" name="area_academica" value="Administracion"
+                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Administración
+        </label>
+
+        <label class="option-label">
+          <input type="radio" name="area_academica" value="Arquitectura"
+                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Arquitectura
+        </label>
+
+        <div class="option-label-inline">
+          <label>
+            <input type="radio" name="area_academica" value="Otra" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
+          </label>
+          
+          <input type="text" class="input-text" placeholder="Especifique..."
+                name="otraSituacionTexto"
+                [(ngModel)]="otraSituacionTexto"
+                [disabled]="situacionSeleccionada !== 'Otra'">
         </div>
+
       </div>
+    </div>
+
 
       <div class="question-group">
         <p class="question-text">21. ¿Considera que la IA mejora su productividad académica?</p>
@@ -281,32 +438,98 @@
       <div class="question-group">
         <p class="question-text">23. ¿Qué aspecto considera más positivo del uso de IA?</p>
         <div class="options-container grid-options">
-          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Ahorro de tiempo"> Ahorro de tiempo</label>
-          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Mayor comprensión"> Mayor comprensión</label>
-          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Automatización de tareas"> Automatización de tareas</label>
-          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Creatividad"> Creatividad</label>
-          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Apoyo en programación"> Apoyo en programación</label>
-          <label class="option-label"><input type="radio" name="aspecto_positivo" value="Generación rápida de contenido"> Generación rápida de contenido</label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_positivo" value="Ahorro de tiempo" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Ahorro de tiempo
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_positivo" value="Mayor comprensión" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Mayor comprensión
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_positivo" value="Automatización de tareas" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Automatización de tareas
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_positivo" value="Creatividad" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Creatividad
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_positivo" value="Apoyo en programación" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Apoyo en programación
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_positivo" value="Generación rápida de contenido" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Generación rápida de contenido
+          </label>
+
           <div class="option-label-inline">
-            <label><input type="radio" name="aspecto_positivo" value="Otra"> Otra:</label>
-            <input type="text" class="input-text" placeholder="Especifique...">
+            <label>
+              <input type="radio" name="aspecto_positivo" value="Otra" 
+                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
+            </label>
+
+            <input type="text" class="input-text" placeholder="Especifique..."
+                  name="otraSituacionTexto"
+                  [(ngModel)]="otraSituacionTexto"
+                  [disabled]="situacionSeleccionada !== 'Otra'">
           </div>
+
         </div>
       </div>
 
       <div class="question-group">
         <p class="question-text">24. ¿Qué aspecto considera más negativo del uso de IA?</p>
         <div class="options-container grid-options">
-          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Dependencia"> Dependencia</label>
-          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Menor razonamiento"> Menor razonamiento</label>
-          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Información incorrecta"> Información incorrecta</label>
-          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Plagio académico"> Plagio académico</label>
-          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Menor esfuerzo personal"> Menor esfuerzo personal</label>
-          <label class="option-label"><input type="radio" name="aspecto_negativo" value="Distracción"> Distracción</label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_negativo" value="Dependencia" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Dependencia
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_negativo" value="Menor razonamiento" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Menor razonamiento
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_negativo" value="Información incorrecta" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Información incorrecta
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_negativo" value="Plagio académico" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Plagio académico
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_negativo" value="Menor esfuerzo personal" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Menor esfuerzo personal
+          </label>
+
+          <label class="option-label">
+            <input type="radio" name="aspecto_negativo" value="Distracción" 
+                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Distracción
+          </label>
+
           <div class="option-label-inline">
-            <label><input type="radio" name="aspecto_negativo" value="Otra"> Otra:</label>
-            <input type="text" class="input-text" placeholder="Especifique...">
+            <label>
+              <input type="radio" name="aspecto_negativo" value="Otra" 
+                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
+            </label>
+
+            <input type="text" class="input-text" placeholder="Especifique..."
+                  name="otraSituacionTexto"
+                  [(ngModel)]="otraSituacionTexto"
+                  [disabled]="situacionSeleccionada !== 'Otra'">
           </div>
+
         </div>
       </div>
 
