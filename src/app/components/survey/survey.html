@@ -1,551 +1,519 @@
 <div class="survey-page">
   <div class="survey-card">
     <h1 class="survey-main-title">Impacto del uso de herramientas de Inteligencia Artificial en el desgaste académico universitario</h1>
-    <p class="survey-subtitle">La información será utilizada únicamente con fines académicos y estadísticos. Por favor, responde con sinceridad.</p>
-
+    
     <form class="survey-form">
 
-      <div class="section-divider">
-        <h2>SECCIÓN 1 - INFORMACIÓN GENERAL</h2>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">1. Edad</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="edad" value="Menor de 18 años"> Menor de 18 años</label>
-          <label class="option-label"><input type="radio" name="edad" value="18-20 años"> 18-20 años</label>
-          <label class="option-label"><input type="radio" name="edad" value="21-23 años"> 21-23 años</label>
-          <label class="option-label"><input type="radio" name="edad" value="24-26 años"> 24-26 años</label>
-          <label class="option-label"><input type="radio" name="edad" value="Mayor de 26 años"> Mayor de 26 años</label>
+      <div *ngIf="currentSection === 0">
+        <div class="section-divider">
+          <h2>VALIDACIÓN DE ESTUDIANTE</h2>
         </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">2. Género</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="genero" value="Masculino"> Masculino</label>
-          <label class="option-label"><input type="radio" name="genero" value="Femenino"> Femenino</label>
-          <label class="option-label"><input type="radio" name="genero" value="Prefiero no responder"> Prefiero no responder</label>
-        </div>
-      </div>
-
-
-      <div class="question-group">
-        <p class="question-text">3. Carrera universitaria</p>
-        <div class="options-container">
-          <input type="text" class="input-text" name="carrera" list="carreras-list" placeholder="Busque o seleccione su carrera...">
-          
-          <datalist id="carreras-list">
-            <option value="Administracion de Empresas"></option>
-            <option value="Agricultura"></option>
-            <option value="Alimentos"></option>
-            <option value="Antropologia"></option>
-            <option value="Arquitectura"></option>
-            <option value="Biomedicina"></option>
-            <option value="Bioquimica y Farmacia"></option>
-            <option value="Biotecnologia"></option>
-            <option value="Ciencia de Datos"></option>
-            <option value="Ciencias Politicas"></option>
-            <option value="Comercio Exterior"></option>
-            <option value="Comunicacion"></option>
-            <option value="Computacion"></option>
-            <option value="Contabilidad y Auditoria"></option>
-            <option value="Derecho"></option>
-            <option value="Diseño Multimedia"></option>
-            <option value="Economia"></option>
-            <option value="Educacion"></option>
-            <option value="Educacion Basica"></option>
-            <option value="Educacion Interultural Bilingue"></option>
-            <option value="Educacion Temprana"></option>
-            <option value="Electronica y Automatizacion"></option>
-            <option value="Enfermeria"></option>
-            <option value="Finanzas"></option>
-            <option value="Fisioterapia"></option>
-            <option value="Gestion Ambiental"></option>
-            <option value="Ingenieria Automotriz"></option>
-            <option value="Ingenieria Civil"></option>
-            <option value="Ingenieria de la Produccion"></option>
-            <option value="Ingenieria Electrica"></option>
-            <option value="Ingenieria Industrial"></option>
-            <option value="Ingenieria en Redes Inteligentes y Ciberseguridad"></option>
-            <option value="Ingenieria en Software"></option>
-            <option value="Ingenieria Mecanica"></option>
-            <option value="Marketing e Inteligencia de Mercados"></option>
-            <option value="Mecatronica"></option>
-            <option value="Medicina Veterinaria"></option>\
-            <option value="Negocios Digitales"></option>
-            <option value="Odontologia"></option>
-            <option value="Pedagogia Deportiva"></option>
-            <option value="Psicologia"></option>
-            <option value="Psicologia Clinica"></option>
-            <option value="Seguridad de la Informacion"></option>
-            <option value="Teologia"></option>
-            <option value="Trabajo Social"></option>
-          </datalist>
-
-        </div>
-      </div>
-      
-
-
-
-      <div class="question-group">
-        <p class="question-text">4. Nivel o semestre actual</p>
-        
-        <small style="display: block; margin-bottom: 10px; color: #666; font-size: 0.85em;">
-          *Nota: Seleccione el ciclo de la materia de nivel más bajo que curse actualmente.
-        </small>
-
-        <div class="options-container">
-          <select class="input-text" name="semestre">
-            <option value="" disabled selected>Seleccione su ciclo...</option>
-            <option value="1">1er ciclo</option>
-            <option value="2">2do ciclo</option>
-            <option value="3">3er ciclo</option>
-            <option value="4">4to ciclo</option>
-            <option value="5">5to ciclo</option>
-            <option value="6">6to ciclo</option>
-            <option value="7">7mo ciclo</option>
-            <option value="8">8vo ciclo</option>
-            <option value="9">9no ciclo</option>
-            <option value="10">10mo ciclo</option>
-          </select>
-        </div>
-      </div>
-
-
-
-
-      <div class="question-group">
-        <p class="question-text">5. Situación actual</p>
-        <div class="options-container">
-          
-          <label class="option-label">
-            <input type="radio" name="situacion" value="Solo estudio" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Solo estudio
-          </label>
-          
-          <label class="option-label">
-            <input type="radio" name="situacion" value="Estudio y trabajo" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Estudio y trabajo
-          </label>
-          
-          <label class="option-label">
-            <input type="radio" name="situacion" value="Solo trabajo" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Solo trabajo
-          </label>
-          
-          <div class="option-label-inline">
-            <label>
-              <input type="radio" name="situacion" value="Otra" 
-                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
-            </label>
-            
-            <input type="text" class="input-text" placeholder="Especifique..."
-                  name="otraSituacionTexto"
-                  [(ngModel)]="otraSituacionTexto"
-                  [disabled]="situacionSeleccionada !== 'Otra'">
-          </div>
-
-        </div>
-      </div>
-
-      <div class="section-divider">
-        <h2>SECCIÓN 2 - DISTRIBUCIÓN DEL TIEMPO</h2>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">6. ¿Cuántas horas al día dedica aproximadamente al estudio?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="horas_estudio" value="Menos de 1 hora"> Menos de 1 hora</label>
-          <label class="option-label"><input type="radio" name="horas_estudio" value="1-2 horas"> 1-2 horas</label>
-          <label class="option-label"><input type="radio" name="horas_estudio" value="3-4 horas"> 3-4 horas</label>
-          <label class="option-label"><input type="radio" name="horas_estudio" value="5-6 horas"> 5-6 horas</label>
-          <label class="option-label"><input type="radio" name="horas_estudio" value="Más de 6 horas"> Más de 6 horas</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">7. ¿Cuántas horas al día dedica al trabajo?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="horas_trabajo" value="No trabajo"> No trabajo</label>
-          <label class="option-label"><input type="radio" name="horas_trabajo" value="1-3 horas"> 1-3 horas</label>
-          <label class="option-label"><input type="radio" name="horas_trabajo" value="4-6 horas"> 4-6 horas</label>
-          <label class="option-label"><input type="radio" name="horas_trabajo" value="7-8 horas"> 7-8 horas</label>
-          <label class="option-label"><input type="radio" name="horas_trabajo" value="Más de 8 horas"> Más de 8 horas</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">8. ¿Cuántas horas al día dedica al ocio o entretenimiento?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="horas_ocio" value="Menos de 1 hora"> Menos de 1 hora</label>
-          <label class="option-label"><input type="radio" name="horas_ocio" value="1-2 horas"> 1-2 horas</label>
-          <label class="option-label"><input type="radio" name="horas_ocio" value="3-4 horas"> 3-4 horas</label>
-          <label class="option-label"><input type="radio" name="horas_ocio" value="Más de 4 horas"> Más de 4 horas</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">9. ¿Cuántas horas duerme aproximadamente al día?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="horas_sueno" value="Menos de 4 horas"> Menos de 4 horas</label>
-          <label class="option-label"><input type="radio" name="horas_sueno" value="4-5 horas"> 4-5 horas</label>
-          <label class="option-label"><input type="radio" name="horas_sueno" value="6-7 horas"> 6-7 horas</label>
-          <label class="option-label"><input type="radio" name="horas_sueno" value="8 horas o más"> 8 horas o más</label>
-        </div>
-      </div>
-
-      <div class="section-divider">
-        <h2>SECCIÓN 3 - USO DE HERRAMIENTAS DE IA</h2>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">10. ¿Utiliza herramientas de Inteligencia Artificial para actividades académicas?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="utiliza_ia" value="Sí"> Sí</label>
-          <label class="option-label"><input type="radio" name="utiliza_ia" value="No"> No</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">11. ¿Con qué frecuencia utiliza herramientas de IA?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Nunca"> Nunca</label>
-          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Rara vez"> Rara vez</label>
-          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Algunas veces por semana"> Algunas veces por semana</label>
-          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Casi todos los días"> Casi todos los días</label>
-          <label class="option-label"><input type="radio" name="frecuencia_ia" value="Todos los días"> Todos los días</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">12. ¿Qué herramientas de IA utiliza con mayor frecuencia? (Puede seleccionar varias opciones)</p>
-        <div class="options-container grid-options">
-          
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="ChatGPT"> ChatGPT</label>
-          
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Gemini"> Gemini</label>
-
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Claude"> Claude</label>
-
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Copilot"> Copilot</label>
-
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="MidJourney"> MidJourney</label>
-
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Canva AI"> Canva AI</label>
-
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Notion AI"> Notion AI</label>
-
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="DeepSeek"> DeepSeek</label>
-
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Suno AI"> Suno AI</label>
-
-          <label class="option-label"><input type="checkbox" name="herramientas_ia" value="Gamma AI"> Gamma AI</label>
-          
-          <div class="option-label-inline">
-            <label>
-              <input type="checkbox" name="isOtraHerramienta" value="Otra"
-                    [(ngModel)]="isOtraHerramienta" (change)="onOtraHerramientaChange()"> Otra:
-            </label>
-            <input type="text" class="input-text" placeholder="Especifique..."
-                  name="otraHerramientaTexto"
-                  [(ngModel)]="otraHerramientaTexto"
-                  [disabled]="!isOtraHerramienta">
+        <div class="question-group">
+          <p class="question-text">Esta encuesta está dirigida únicamente a estudiantes de la Universidad Politécnica Salesiana (UPS).</p>
+          <p class="question-text" style="font-size: 0.95rem; font-weight: normal;">Por favor, ingrese su correo institucional para continuar:</p>
+          <div class="options-container">
+            <input type="email" class="input-text" name="email" [(ngModel)]="email" placeholder="ejemplo@est.ups.edu.ec">
+            <p *ngIf="emailError" class="error-text">El correo debe terminar obligatoriamente en @est.ups.edu.ec</p>
           </div>
         </div>
       </div>
 
-      <div class="question-group">
-        <p class="question-text">13. ¿Para qué utiliza principalmente herramientas de IA? (Puede seleccionar varias opciones)</p>
-        <div class="options-container grid-options">
+      <div *ngIf="currentSection === 1">
+        <div class="section-divider">
+          <h2>SECCIÓN 1 - INFORMACIÓN GENERAL</h2>
+        </div>
 
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Resúmenes"> Resúmenes</label>
+        <div class="question-group">
+          <p class="question-text">1. Edad</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="edad" value="Menor de 18 años" [(ngModel)]="edad"> Menor de 18 años</label>
+            <label class="option-label"><input type="radio" name="edad" value="18-20 años" [(ngModel)]="edad"> 18-20 años</label>
+            <label class="option-label"><input type="radio" name="edad" value="21-23 años" [(ngModel)]="edad"> 21-23 años</label>
+            <label class="option-label"><input type="radio" name="edad" value="24-26 años" [(ngModel)]="edad"> 24-26 años</label>
+            <label class="option-label"><input type="radio" name="edad" value="Mayor de 26 años" [(ngModel)]="edad"> Mayor de 26 años</label>
+          </div>
+        </div>
 
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Investigación"> Investigación</label>
+        <div class="question-group">
+          <p class="question-text">2. Género</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="genero" value="Masculino" [(ngModel)]="genero"> Masculino</label>
+            <label class="option-label"><input type="radio" name="genero" value="Femenino" [(ngModel)]="genero"> Femenino</label>
+            <label class="option-label"><input type="radio" name="genero" value="Prefiero no responder" [(ngModel)]="genero"> Prefiero no responder</label>
+          </div>
+        </div>
 
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Programación"> Programación</label>
+        <div class="question-group">
+          <p class="question-text">3. Carrera universitaria</p>
+          <div class="options-container">
+            <select class="input-text" name="carrera" [(ngModel)]="carrera">
+              <option value="" disabled selected>Busque o seleccione su carrera...</option>
+              <option value="Administracion de Empresas">Administracion de Empresas</option>
+              <option value="Agricultura">Agricultura</option>
+              <option value="Alimentos">Alimentos</option>
+              <option value="Antropologia">Antropologia</option>
+              <option value="Arquitectura">Arquitectura</option>
+              <option value="Biomedicina">Biomedicina</option>
+              <option value="Bioquimica y Farmacia">Bioquimica y Farmacia</option>
+              <option value="Biotecnologia">Biotecnologia</option>
+              <option value="Ciencia de Datos">Ciencia de Datos</option>
+              <option value="Ciencias Politicas">Ciencias Politicas</option>
+              <option value="Comercio Exterior">Comercio Exterior</option>
+              <option value="Comunicacion">Comunicacion</option>
+              <option value="Computacion">Computacion</option>
+              <option value="Contabilidad y Auditoria">Contabilidad y Auditoria</option>
+              <option value="Derecho">Derecho</option>
+              <option value="Diseño Multimedia">Diseño Multimedia</option>
+              <option value="Economia">Economia</option>
+              <option value="Educacion">Educacion</option>
+              <option value="Educacion Basica">Educacion Basica</option>
+              <option value="Educacion Interultural Bilingue">Educacion Interultural Bilingue</option>
+              <option value="Educacion Temprana">Educacion Temprana</option>
+              <option value="Electronica y Automatizacion">Electronica y Automatizacion</option>
+              <option value="Enfermeria">Enfermeria</option>
+              <option value="Finanzas">Finanzas</option>
+              <option value="Fisioterapia">Fisioterapia</option>
+              <option value="Gestion Ambiental">Gestion Ambiental</option>
+              <option value="Ingenieria Automotriz">Ingenieria Automotriz</option>
+              <option value="Ingenieria Civil">Ingenieria Civil</option>
+              <option value="Ingenieria de la Produccion">Ingenieria de la Produccion</option>
+              <option value="Ingenieria Electrica">Ingenieria Electrica</option>
+              <option value="Ingenieria Industrial">Ingenieria Industrial</option>
+              <option value="Ingenieria en Redes Inteligentes y Ciberseguridad">Ingenieria en Redes Inteligentes y Ciberseguridad</option>
+              <option value="Ingenieria en Software">Ingenieria en Software</option>
+              <option value="Ingenieria Mecanica">Ingenieria Mecanica</option>
+              <option value="Marketing e Inteligencia de Mercados">Marketing e Inteligencia de Mercados</option>
+              <option value="Mecatronica">Mecatronica</option>
+              <option value="Medicina Veterinaria">Medicina Veterinaria</option>
+              <option value="Negocios Digitales">Negocios Digitales</option>
+              <option value="Odontologia">Odontologia</option>
+              <option value="Pedagogia Deportiva">Pedagogia Deportiva</option>
+              <option value="Psicologia">Psicologia</option>
+              <option value="Psicologia Clinica">Psicologia Clinica</option>
+              <option value="Seguridad de la Informacion">Seguridad de la Informacion</option>
+              <option value="Teologia">Teologia</option>
+              <option value="Trabajo Social">Trabajo Social</option>
+            </select>
+          </div>
+        </div>
 
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Generación de texto"> Generación de texto</label>
+        <div class="question-group">
+          <p class="question-text">4. Nivel o semestre actual</p>
+          <small style="display: block; margin-bottom: 10px; color: #666; font-size: 0.85em;">
+            *Nota: Seleccione el ciclo de la materia de nivel más bajo que curse actualmente.
+          </small>
+          <div class="options-container">
+            <select class="input-text" name="semestre" [(ngModel)]="semestre">
+              <option value="" disabled selected>Seleccione su ciclo...</option>
+              <option value="1">1er ciclo</option>
+              <option value="2">2do ciclo</option>
+              <option value="3">3er ciclo</option>
+              <option value="4">4to ciclo</option>
+              <option value="5">5to ciclo</option>
+              <option value="6">6to ciclo</option>
+              <option value="7">7mo ciclo</option>
+              <option value="8">8vo ciclo</option>
+              <option value="9">9no ciclo</option>
+              <option value="10">10mo ciclo</option>
+            </select>
+          </div>
+        </div>
 
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Presentaciones"> Presentaciones</label>
-
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Generación de imágenes"> Generación de imágenes</label>
-
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Música"> Música</label>
-
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Resolución de tareas"> Resolución de tareas</label>
-
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Explicación de temas"> Explicación de temas</label>
-
-          <label class="option-label"><input type="checkbox" name="proposito_ia" value="Traducción"> Traducción</label>
-
-          <div class="option-label-inline">
-            <label>
-              <input type="checkbox" name="isOtroProposito" value="Otra"
-                    [(ngModel)]="isOtroProposito" (change)="onOtroPropositoChange()"> Otra:
+        <div class="question-group">
+          <p class="question-text">5. Situación actual</p>
+          <div class="options-container">
+            <label class="option-label">
+              <input type="radio" name="situacion" value="Solo estudio" 
+                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Solo estudio
             </label>
-            <input type="text" class="input-text" placeholder="Especifique..."
-                  name="otroPropositoTexto"
-                  [(ngModel)]="otroPropositoTexto"
-                  [disabled]="!isOtroProposito">
+            <label class="option-label">
+              <input type="radio" name="situacion" value="Estudio y trabajo" 
+                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Estudio y trabajo
+            </label>
+            <label class="option-label">
+              <input type="radio" name="situacion" value="Solo trabajo" 
+                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Solo trabajo
+            </label>
+            <div class="option-label-inline">
+              <label>
+                <input type="radio" name="situacion" value="Otra" 
+                      [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
+              </label>
+              <input type="text" class="input-text" placeholder="Especifique..."
+                    name="otraSituacionTexto"
+                    [(ngModel)]="otraSituacionTexto"
+                    [disabled]="situacionSeleccionada !== 'Otra'">
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="question-group">
-        <p class="question-text">14. ¿Considera que el uso de IA le ayuda a ahorrar tiempo académico?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="1"> Totalmente en desacuerdo</label>
-          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="2"> En desacuerdo</label>
-          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="3"> Neutral</label>
-          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="4"> De acuerdo</label>
-          <label class="option-label"><input type="radio" name="ahorro_tiempo" value="5"> Totalmente de acuerdo</label>
-        </div>
-      </div>
-
-      <div class="section-divider">
-        <h2>SECCIÓN 4 - DESGASTE ACADÉMICO</h2>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">15. ¿Con qué frecuencia siente agotamiento académico?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="agotamiento" value="Nunca"> Nunca</label>
-          <label class="option-label"><input type="radio" name="agotamiento" value="Rara vez"> Rara vez</label>
-          <label class="option-label"><input type="radio" name="agotamiento" value="Algunas veces"> Algunas veces</label>
-          <label class="option-label"><input type="radio" name="agotamiento" value="Frecuentemente"> Frecuentemente</label>
-          <label class="option-label"><input type="radio" name="agotamiento" value="Siempre"> Siempre</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">16. ¿Considera que la carga académica afecta su salud emocional?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="salud_emocional" value="1"> Totalmente en desacuerdo</label>
-          <label class="option-label"><input type="radio" name="salud_emocional" value="2"> En desacuerdo</label>
-          <label class="option-label"><input type="radio" name="salud_emocional" value="3"> Neutral</label>
-          <label class="option-label"><input type="radio" name="salud_emocional" value="4"> De acuerdo</label>
-          <label class="option-label"><input type="radio" name="salud_emocional" value="5"> Totalmente de acuerdo</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">17. ¿Considera que el uso de IA reduce su nivel de estrés académico?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="estres_ia" value="1"> Totalmente en desacuerdo</label>
-          <label class="option-label"><input type="radio" name="estres_ia" value="2"> En desacuerdo</label>
-          <label class="option-label"><input type="radio" name="estres_ia" value="3"> Neutral</label>
-          <label class="option-label"><input type="radio" name="estres_ia" value="4"> De acuerdo</label>
-          <label class="option-label"><input type="radio" name="estres_ia" value="5"> Totalmente de acuerdo</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">18. ¿El uso de IA le ayuda a comprender mejor ciertos temas?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="comprension_ia" value="Nunca"> Nunca</label>
-          <label class="option-label"><input type="radio" name="comprension_ia" value="Rara vez"> Rara vez</label>
-          <label class="option-label"><input type="radio" name="comprension_ia" value="Algunas veces"> Algunas veces</label>
-          <label class="option-label"><input type="radio" name="comprension_ia" value="Frecuentemente"> Frecuentemente</label>
-          <label class="option-label"><input type="radio" name="comprension_ia" value="Siempre"> Siempre</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">19. ¿Considera que el uso excesivo de IA puede generar dependencia académica?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="dependencia" value="Sí"> Sí</label>
-          <label class="option-label"><input type="radio" name="dependencia" value="No"> No</label>
-          <label class="option-label"><input type="radio" name="dependencia" value="Tal vez"> Tal vez</label>
-        </div>
-      </div>
-
-      <div class="section-divider">
-        <h2>SECCIÓN 5 - ANÁLISIS COMPARATIVO</h2>
-      </div>
-
-     <div class="question-group">
-      <p class="question-text">20. ¿Qué área académica considera que utiliza más herramientas de IA?</p>
-      <div class="options-container grid-options">
-
-        <label class="option-label">
-          <input type="radio" name="area_academica" value="Ingenierias"
-                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Ingenierías
-        </label>
-
-        <label class="option-label">
-          <input type="radio" name="area_academica" value="Diseno y Multimedia"
-                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Diseño y Multimedia
-        </label>
-
-        <label class="option-label">
-          <input type="radio" name="area_academica" value="Ciencias Sociales"
-                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Ciencias Sociales
-        </label>
-
-        <label class="option-label">
-          <input type="radio" name="area_academica" value="Medicina"
-                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Medicina
-        </label>
-
-        <label class="option-label">
-          <input type="radio" name="area_academica" value="Administracion"
-                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Administración
-        </label>
-
-        <label class="option-label">
-          <input type="radio" name="area_academica" value="Arquitectura"
-                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Arquitectura
-        </label>
-
-        <div class="option-label-inline">
-          <label>
-            <input type="radio" name="area_academica" value="Otra" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
-          </label>
-          
-          <input type="text" class="input-text" placeholder="Especifique..."
-                name="otraSituacionTexto"
-                [(ngModel)]="otraSituacionTexto"
-                [disabled]="situacionSeleccionada !== 'Otra'">
+      <div *ngIf="currentSection === 2">
+        <div class="section-divider">
+          <h2>SECCIÓN 2 - DISTRIBUCIÓN DEL TIEMPO</h2>
         </div>
 
-      </div>
-    </div>
-
-
-      <div class="question-group">
-        <p class="question-text">21. ¿Considera que la IA mejora su productividad académica?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="productividad" value="1"> Totalmente en desacuerdo</label>
-          <label class="option-label"><input type="radio" name="productividad" value="2"> En desacuerdo</label>
-          <label class="option-label"><input type="radio" name="productividad" value="3"> Neutral</label>
-          <label class="option-label"><input type="radio" name="productividad" value="4"> De acuerdo</label>
-          <label class="option-label"><input type="radio" name="productividad" value="5"> Totalmente de acuerdo</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">22. ¿Considera que actualmente las universidades deberían integrar oficialmente herramientas de IA en la enseñanza?</p>
-        <div class="options-container">
-          <label class="option-label"><input type="radio" name="integrar_ia" value="Sí"> Sí</label>
-          <label class="option-label"><input type="radio" name="integrar_ia" value="No"> No</label>
-          <label class="option-label"><input type="radio" name="integrar_ia" value="Parcialmente"> Parcialmente</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <p class="question-text">23. ¿Qué aspecto considera más positivo del uso de IA?</p>
-        <div class="options-container grid-options">
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_positivo" value="Ahorro de tiempo" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Ahorro de tiempo
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_positivo" value="Mayor comprensión" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Mayor comprensión
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_positivo" value="Automatización de tareas" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Automatización de tareas
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_positivo" value="Creatividad" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Creatividad
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_positivo" value="Apoyo en programación" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Apoyo en programación
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_positivo" value="Generación rápida de contenido" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Generación rápida de contenido
-          </label>
-
-          <div class="option-label-inline">
-            <label>
-              <input type="radio" name="aspecto_positivo" value="Otra" 
-                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
-            </label>
-
-            <input type="text" class="input-text" placeholder="Especifique..."
-                  name="otraSituacionTexto"
-                  [(ngModel)]="otraSituacionTexto"
-                  [disabled]="situacionSeleccionada !== 'Otra'">
+        <div class="question-group">
+          <p class="question-text">6. ¿Cuántas horas al día dedica aproximadamente al estudio?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="horas_estudio" value="Menos de 1 hora" [(ngModel)]="horasEstudio"> Menos de 1 hora</label>
+            <label class="option-label"><input type="radio" name="horas_estudio" value="1-2 horas" [(ngModel)]="horasEstudio"> 1-2 horas</label>
+            <label class="option-label"><input type="radio" name="horas_estudio" value="3-4 horas" [(ngModel)]="horasEstudio"> 3-4 horas</label>
+            <label class="option-label"><input type="radio" name="horas_estudio" value="5-6 horas" [(ngModel)]="horasEstudio"> 5-6 horas</label>
+            <label class="option-label"><input type="radio" name="horas_estudio" value="Más de 6 horas" [(ngModel)]="horasEstudio"> Más de 6 horas</label>
           </div>
-
         </div>
-      </div>
 
-      <div class="question-group">
-        <p class="question-text">24. ¿Qué aspecto considera más negativo del uso de IA?</p>
-        <div class="options-container grid-options">
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_negativo" value="Dependencia" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Dependencia
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_negativo" value="Menor razonamiento" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Menor razonamiento
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_negativo" value="Información incorrecta" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Información incorrecta
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_negativo" value="Plagio académico" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Plagio académico
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_negativo" value="Menor esfuerzo personal" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Menor esfuerzo personal
-          </label>
-
-          <label class="option-label">
-            <input type="radio" name="aspecto_negativo" value="Distracción" 
-                  [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Distracción
-          </label>
-
-          <div class="option-label-inline">
-            <label>
-              <input type="radio" name="aspecto_negativo" value="Otra" 
-                    [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
-            </label>
-
-            <input type="text" class="input-text" placeholder="Especifique..."
-                  name="otraSituacionTexto"
-                  [(ngModel)]="otraSituacionTexto"
-                  [disabled]="situacionSeleccionada !== 'Otra'">
+        <div class="question-group">
+          <p class="question-text">7. ¿Cuántas horas al día dedica al trabajo?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="horas_trabajo" value="No trabajo" [(ngModel)]="horasTrabajo"> No trabajo</label>
+            <label class="option-label"><input type="radio" name="horas_trabajo" value="1-3 horas" [(ngModel)]="horasTrabajo"> 1-3 horas</label>
+            <label class="option-label"><input type="radio" name="horas_trabajo" value="4-6 horas" [(ngModel)]="horasTrabajo"> 4-6 horas</label>
+            <label class="option-label"><input type="radio" name="horas_trabajo" value="7-8 horas" [(ngModel)]="horasTrabajo"> 7-8 horas</label>
+            <label class="option-label"><input type="radio" name="horas_trabajo" value="Más de 8 horas" [(ngModel)]="horasTrabajo"> Más de 8 horas</label>
           </div>
+        </div>
 
+        <div class="question-group">
+          <p class="question-text">8. ¿Cuántas horas al día dedica al ocio o entretenimiento?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="horas_ocio" value="Menos de 1 hora" [(ngModel)]="horasOcio"> Menos de 1 hora</label>
+            <label class="option-label"><input type="radio" name="horas_ocio" value="1-2 horas" [(ngModel)]="horasOcio"> 1-2 horas</label>
+            <label class="option-label"><input type="radio" name="horas_ocio" value="3-4 horas" [(ngModel)]="horasOcio"> 3-4 horas</label>
+            <label class="option-label"><input type="radio" name="horas_ocio" value="Más de 4 horas" [(ngModel)]="horasOcio"> Más de 4 horas</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">9. ¿Cuántas horas duerme aproximadamente al día?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="horas_sueno" value="Menos de 4 horas" [(ngModel)]="horasSueno"> Menos de 4 horas</label>
+            <label class="option-label"><input type="radio" name="horas_sueno" value="4-5 horas" [(ngModel)]="horasSueno"> 4-5 horas</label>
+            <label class="option-label"><input type="radio" name="horas_sueno" value="6-7 horas" [(ngModel)]="horasSueno"> 6-7 horas</label>
+            <label class="option-label"><input type="radio" name="horas_sueno" value="8 horas o más" [(ngModel)]="horasSueno"> 8 horas o más</label>
+          </div>
         </div>
       </div>
 
-      <div class="section-divider">
-        <h2>SECCIÓN 6 - PREGUNTA ABIERTA</h2>
+      <div *ngIf="currentSection === 3">
+        <div class="section-divider">
+          <h2>SECCIÓN 3 - USO DE HERRAMIENTAS DE IA</h2>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">10. ¿Utiliza herramientas de Inteligencia Artificial para actividades académicas?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="utiliza_ia" value="Sí" [(ngModel)]="utilizaIa"> Sí</label>
+            <label class="option-label"><input type="radio" name="utiliza_ia" value="No" [(ngModel)]="utilizaIa"> No</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">11. ¿Con qué frecuencia utiliza herramientas de IA?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="frecuencia_ia" value="Nunca" [(ngModel)]="frecuenciaIa"> Nunca</label>
+            <label class="option-label"><input type="radio" name="frecuencia_ia" value="Rara vez" [(ngModel)]="frecuenciaIa"> Rara vez</label>
+            <label class="option-label"><input type="radio" name="frecuencia_ia" value="Algunas veces por semana" [(ngModel)]="frecuenciaIa"> Algunas veces por semana</label>
+            <label class="option-label"><input type="radio" name="frecuencia_ia" value="Casi todos los días" [(ngModel)]="frecuenciaIa"> Casi todos los días</label>
+            <label class="option-label"><input type="radio" name="frecuencia_ia" value="Todos los días" [(ngModel)]="frecuenciaIa"> Todos los días</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">12. ¿Qué herramientas de IA utiliza con mayor frecuencia? (Puede seleccionar varias opciones)</p>
+          <div class="options-container grid-options">
+            <label class="option-label"><input type="checkbox" name="h_chatgpt" [(ngModel)]="herramientas.chatgpt"> ChatGPT</label>
+            <label class="option-label"><input type="checkbox" name="h_gemini" [(ngModel)]="herramientas.gemini"> Gemini</label>
+            <label class="option-label"><input type="checkbox" name="h_claude" [(ngModel)]="herramientas.claude"> Claude</label>
+            <label class="option-label"><input type="checkbox" name="h_copilot" [(ngModel)]="herramientas.copilot"> Copilot</label>
+            <label class="option-label"><input type="checkbox" name="h_midjourney" [(ngModel)]="herramientas.midjourney"> MidJourney</label>
+            <label class="option-label"><input type="checkbox" name="h_canva" [(ngModel)]="herramientas.canva"> Canva AI</label>
+            <label class="option-label"><input type="checkbox" name="h_notion" [(ngModel)]="herramientas.notion"> Notion AI</label>
+            <label class="option-label"><input type="checkbox" name="h_deepseek" [(ngModel)]="herramientas.deepseek"> DeepSeek</label>
+            <label class="option-label"><input type="checkbox" name="h_suno" [(ngModel)]="herramientas.suno"> Suno AI</label>
+            <label class="option-label"><input type="checkbox" name="h_gamma" [(ngModel)]="herramientas.gamma"> Gamma AI</label>
+            <div class="option-label-inline">
+              <label>
+                <input type="checkbox" name="isOtraHerramienta" value="Otra"
+                      [(ngModel)]="isOtraHerramienta" (change)="onOtraHerramientaChange()"> Otra:
+              </label>
+              <input type="text" class="input-text" placeholder="Especifique..."
+                    name="otraHerramientaTexto"
+                    [(ngModel)]="otraHerramientaTexto"
+                    [disabled]="!isOtraHerramienta">
+            </div>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">13. ¿Para qué utiliza principalmente herramientas de IA? (Puede seleccionar varias opciones)</p>
+          <div class="options-container grid-options">
+            <label class="option-label"><input type="checkbox" name="p_resumenes" [(ngModel)]="propositos.resumenes"> Resúmenes</label>
+            <label class="option-label"><input type="checkbox" name="p_investigacion" [(ngModel)]="propositos.investigacion"> Investigación</label>
+            <label class="option-label"><input type="checkbox" name="p_programacion" [(ngModel)]="propositos.programacion"> Programación</label>
+            <label class="option-label"><input type="checkbox" name="p_texto" [(ngModel)]="propositos.texto"> Generación de texto</label>
+            <label class="option-label"><input type="checkbox" name="p_presentaciones" [(ngModel)]="propositos.presentaciones"> Presentaciones</label>
+            <label class="option-label"><input type="checkbox" name="p_imagenes" [(ngModel)]="propositos.imagenes"> Generación de imágenes</label>
+            <label class="option-label"><input type="checkbox" name="p_musica" [(ngModel)]="propositos.musica"> Música</label>
+            <label class="option-label"><input type="checkbox" name="p_tareas" [(ngModel)]="propositos.tareas"> Resolución de tareas</label>
+            <label class="option-label"><input type="checkbox" name="p_explicacion" [(ngModel)]="propositos.explicacion"> Explicación de temas</label>
+            <label class="option-label"><input type="checkbox" name="p_traduccion" [(ngModel)]="propositos.traduccion"> Traducción</label>
+            <div class="option-label-inline">
+              <label>
+                <input type="checkbox" name="isOtroProposito" value="Otra"
+                      [(ngModel)]="isOtroProposito" (change)="onOtroPropositoChange()"> Otra:
+              </label>
+              <input type="text" class="input-text" placeholder="Especifique..."
+                    name="otroPropositoTexto"
+                    [(ngModel)]="otroPropositoTexto"
+                    [disabled]="!isOtroProposito">
+            </div>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">14. ¿Considera que el uso de IA le ayuda a ahorrar tiempo académico?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="ahorro_tiempo" value="1" [(ngModel)]="ahorroTiempo"> Totalmente en desacuerdo</label>
+            <label class="option-label"><input type="radio" name="ahorro_tiempo" value="2" [(ngModel)]="ahorroTiempo"> En desacuerdo</label>
+            <label class="option-label"><input type="radio" name="ahorro_tiempo" value="3" [(ngModel)]="ahorroTiempo"> Neutral</label>
+            <label class="option-label"><input type="radio" name="ahorro_tiempo" value="4" [(ngModel)]="ahorroTiempo"> De acuerdo</label>
+            <label class="option-label"><input type="radio" name="ahorro_tiempo" value="5" [(ngModel)]="ahorroTiempo"> Totalmente de acuerdo</label>
+          </div>
+        </div>
       </div>
 
-      <div class="question-group">
-        <p class="question-text">25. Desde su experiencia personal, ¿cómo considera que la Inteligencia Artificial ha influido en su vida académica?</p>
-        <div class="options-container">
-          <textarea class="input-textarea" name="experiencia_abierta" placeholder="Escriba su respuesta aquí..."></textarea>
+      <div *ngIf="currentSection === 4">
+        <div class="section-divider">
+          <h2>SECCIÓN 4 - DESGASTE ACADÉMICO</h2>
         </div>
+
+        <div class="question-group">
+          <p class="question-text">15. ¿Con qué frecuencia siente agotamiento académico?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="agotamiento" value="Nunca" [(ngModel)]="agotamiento"> Nunca</label>
+            <label class="option-label"><input type="radio" name="agotamiento" value="Rara vez" [(ngModel)]="agotamiento"> Rara vez</label>
+            <label class="option-label"><input type="radio" name="agotamiento" value="Algunas veces" [(ngModel)]="agotamiento"> Algunas veces</label>
+            <label class="option-label"><input type="radio" name="agotamiento" value="Frecuentemente" [(ngModel)]="agotamiento"> Frecuentemente</label>
+            <label class="option-label"><input type="radio" name="agotamiento" value="Siempre" [(ngModel)]="agotamiento"> Siempre</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">16. ¿Considera que la carga académica afecta su salud emocional?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="salud_emocional" value="1" [(ngModel)]="saludEmocional"> Totalmente en desacuerdo</label>
+            <label class="option-label"><input type="radio" name="salud_emocional" value="2" [(ngModel)]="saludEmocional"> En desacuerdo</label>
+            <label class="option-label"><input type="radio" name="salud_emocional" value="3" [(ngModel)]="saludEmocional"> Neutral</label>
+            <label class="option-label"><input type="radio" name="salud_emocional" value="4" [(ngModel)]="saludEmocional"> De acuerdo</label>
+            <label class="option-label"><input type="radio" name="salud_emocional" value="5" [(ngModel)]="saludEmocional"> Totalmente de acuerdo</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">17. ¿Considera que el uso de IA reduce su nivel de estrés académico?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="estres_ia" value="1" [(ngModel)]="estresIa"> Totalmente en desacuerdo</label>
+            <label class="option-label"><input type="radio" name="estres_ia" value="2" [(ngModel)]="estresIa"> En desacuerdo</label>
+            <label class="option-label"><input type="radio" name="estres_ia" value="3" [(ngModel)]="estresIa"> Neutral</label>
+            <label class="option-label"><input type="radio" name="estres_ia" value="4" [(ngModel)]="estresIa"> De acuerdo</label>
+            <label class="option-label"><input type="radio" name="estres_ia" value="5" [(ngModel)]="estresIa"> Totalmente de acuerdo</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">18. ¿El uso de IA le ayuda a comprender mejor ciertos temas?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="comprension_ia" value="Nunca" [(ngModel)]="comprensionIa"> Nunca</label>
+            <label class="option-label"><input type="radio" name="comprension_ia" value="Rara vez" [(ngModel)]="comprensionIa"> Rara vez</label>
+            <label class="option-label"><input type="radio" name="comprension_ia" value="Algunas veces" [(ngModel)]="comprensionIa"> Algunas veces</label>
+            <label class="option-label"><input type="radio" name="comprension_ia" value="Frecuentemente" [(ngModel)]="comprensionIa"> Frecuentemente</label>
+            <label class="option-label"><input type="radio" name="comprension_ia" value="Siempre" [(ngModel)]="comprensionIa"> Siempre</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">19. ¿Considera que el uso excesivo de IA puede generar dependencia académica?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="dependencia" value="Sí" [(ngModel)]="dependencia"> Sí</label>
+            <label class="option-label"><input type="radio" name="dependencia" value="No" [(ngModel)]="dependencia"> No</label>
+            <label class="option-label"><input type="radio" name="dependencia" value="Tal vez" [(ngModel)]="dependencia"> Tal vez</label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentSection === 5">
+        <div class="section-divider">
+          <h2>SECCIÓN 5 - ANÁLISIS COMPARATIVO</h2>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">20. ¿Qué área académica considera que utiliza más herramientas de IA?</p>
+          <div class="options-container grid-options">
+            <label class="option-label">
+              <input type="radio" name="area_academica" value="Ingenierias"
+                    [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Ingenierías
+            </label>
+            <label class="option-label">
+              <input type="radio" name="area_academica" value="Diseno y Multimedia"
+                    [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Diseño y Multimedia
+            </label>
+            <label class="option-label">
+              <input type="radio" name="area_academica" value="Ciencias Sociales"
+                    [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Ciencias Sociales
+            </label>
+            <label class="option-label">
+              <input type="radio" name="area_academica" value="Medicina"
+                    [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Medicina
+            </label>
+            <label class="option-label">
+              <input type="radio" name="area_academica" value="Administracion"
+                    [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Administración
+            </label>
+            <label class="option-label">
+              <input type="radio" name="area_academica" value="Arquitectura"
+                    [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Arquitectura
+            </label>
+            <div class="option-label-inline">
+              <label>
+                <input type="radio" name="area_academica" value="Otra" 
+                      [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Otra:
+              </label>
+              <input type="text" class="input-text" placeholder="Especifique..."
+                    name="otraAreaTexto"
+                    [(ngModel)]="otraAreaTexto"
+                    [disabled]="areaSeleccionada !== 'Otra'">
+            </div>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">21. ¿Considera que la IA mejora su productividad académica?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="productividad" value="1" [(ngModel)]="productividad"> Totalmente en desacuerdo</label>
+            <label class="option-label"><input type="radio" name="productividad" value="2" [(ngModel)]="productividad"> En desacuerdo</label>
+            <label class="option-label"><input type="radio" name="productividad" value="3" [(ngModel)]="productividad"> Neutral</label>
+            <label class="option-label"><input type="radio" name="productividad" value="4" [(ngModel)]="productividad"> De acuerdo</label>
+            <label class="option-label"><input type="radio" name="productividad" value="5" [(ngModel)]="productividad"> Totalmente de acuerdo</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">22. ¿Considera que actualmente las universidades deberían integrar oficialmente herramientas de IA en la enseñanza?</p>
+          <div class="options-container">
+            <label class="option-label"><input type="radio" name="integrar_ia" value="Sí" [(ngModel)]="integrarIa"> Sí</label>
+            <label class="option-label"><input type="radio" name="integrar_ia" value="No" [(ngModel)]="integrarIa"> No</label>
+            <label class="option-label"><input type="radio" name="integrar_ia" value="Parcialmente" [(ngModel)]="integrarIa"> Parcialmente</label>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">23. ¿Qué aspecto considera más positivo del uso de IA?</p>
+          <div class="options-container grid-options">
+            <label class="option-label">
+              <input type="radio" name="aspecto_positivo" value="Ahorro de tiempo" 
+                    [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Ahorro de tiempo
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_positivo" value="Mayor comprensión" 
+                    [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Mayor comprensión
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_positivo" value="Automatización de tareas" 
+                    [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Automatización de tareas
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_positivo" value="Creatividad" 
+                    [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Creatividad
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_positivo" value="Apoyo en programación" 
+                    [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Apoyo en programación
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_positivo" value="Generación rápida de contenido" 
+                    [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Generación rápida de contenido
+            </label>
+            <div class="option-label-inline">
+              <label>
+                <input type="radio" name="aspecto_positivo" value="Otra" 
+                      [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Otra:
+              </label>
+              <input type="text" class="input-text" placeholder="Especifique..."
+                    name="otroAspectoPositivoTexto"
+                    [(ngModel)]="otroAspectoPositivoTexto"
+                    [disabled]="aspectoPositivoSeleccionado !== 'Otra'">
+            </div>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">24. ¿Qué aspecto considera más negativo del uso de IA?</p>
+          <div class="options-container grid-options">
+            <label class="option-label">
+              <input type="radio" name="aspecto_negativo" value="Dependencia" 
+                    [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Dependencia
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_negativo" value="Menor razonamiento" 
+                    [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Menor razonamiento
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_negativo" value="Información incorrecta" 
+                    [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Información incorrecta
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_negativo" value="Plagio académico" 
+                    [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Plagio académico
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_negativo" value="Menor esfuerzo personal" 
+                    [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Menor esfuerzo personal
+            </label>
+            <label class="option-label">
+              <input type="radio" name="aspecto_negativo" value="Distracción" 
+                    [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Distracción
+            </label>
+            <div class="option-label-inline">
+              <label>
+                <input type="radio" name="aspecto_negativo" value="Otra" 
+                      [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Otra:
+              </label>
+              <input type="text" class="input-text" placeholder="Especifique..."
+                    name="otroAspectoNegativoTexto"
+                    [(ngModel)]="otroAspectoNegativoTexto"
+                    [disabled]="aspectoNegativoSeleccionado !== 'Otra'">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentSection === 6">
+        <div class="section-divider">
+          <h2>SECCIÓN 6 - PREGUNTA ABIERTA</h2>
+        </div>
+
+        <div class="question-group">
+          <p class="question-text">25. Desde su experiencia personal, ¿cómo considera que la Inteligencia Artificial ha influido en su vida académica?</p>
+          <div class="options-container">
+            <textarea class="input-textarea" name="experiencia_abierta" [(ngModel)]="experienciaAbierta" placeholder="Escriba su respuesta aquí..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="showValidationError" class="error-banner">
+        Por favor, responda todas las preguntas de esta sección antes de continuar.
       </div>
 
       <div class="form-actions">
-        <button type="button" (click)="submitSurvey()" class="btn-submit">
+        <button *ngIf="currentSection > 0" type="button" (click)="prevSection()" class="btn-secondary">
+          Anterior
+        </button>
+        <button *ngIf="currentSection < 6" type="button" (click)="nextSection()" class="btn-primary btn-right">
+          Siguiente
+        </button>
+        <button *ngIf="currentSection === 6" type="button" (click)="submitSurvey()" class="btn-submit btn-right">
           Enviar respuestas
         </button>
       </div>
