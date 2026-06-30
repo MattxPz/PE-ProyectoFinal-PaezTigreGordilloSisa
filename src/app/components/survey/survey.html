@@ -8,12 +8,47 @@
         <div class="section-divider">
           <h2>VALIDACIÓN DE ESTUDIANTE</h2>
         </div>
+
         <div class="question-group">
-          <p class="question-text">Esta encuesta está dirigida únicamente a estudiantes de la Universidad Politécnica Salesiana (UPS).</p>
-          <p class="question-text" style="font-size: 0.95rem; font-weight: normal;">Por favor, ingrese su correo institucional para continuar:</p>
+          <p class="question-text">
+            La presente encuesta tiene como finalidad recopilar información relacionada con el uso de herramientas de Inteligencia Artificial en actividades académicas universitarias y analizar estadísticamente su posible impacto en:
+          </p>
+
+          <ul class="survey-objectives">
+            <li>Reducción del desgaste académico.</li>
+            <li>Optimización del tiempo.</li>
+            <li>Hábitos de estudio.</li>
+            <li>Productividad académica.</li>
+            <li>Percepción estudiantil sobre el uso de Inteligencia Artificial.</li>
+          </ul>
+
+          <p class="question-text">
+            La información recopilada será utilizada exclusivamente con fines académicos y estadísticos.
+          </p>
+
+          <p class="question-text">
+            Esta encuesta está dirigida únicamente a estudiantes de la Universidad Politécnica Salesiana (UPS).
+          </p>
+
+          <p class="question-text">
+            Se solicitará el correo institucional únicamente para verificar que el participante pertenece a la UPS. El correo electrónico no será almacenado, publicado, compartido ni utilizado para identificar a los participantes. Las respuestas serán tratadas de forma confidencial y analizadas de manera agregada, sin asociarlas a datos personales.
+          </p>
+
+          <p class="question-text" style="font-size: 0.95rem; font-weight: normal;">
+            Por favor, ingrese su correo institucional para continuar:
+          </p>
+
           <div class="options-container">
-            <input type="email" class="input-text" name="email" [(ngModel)]="email" placeholder="ejemplo@est.ups.edu.ec">
-            <p *ngIf="emailError" class="error-text">El correo debe terminar obligatoriamente en @est.ups.edu.ec</p>
+            <input
+              type="email"
+              class="input-text"
+              name="email"
+              [(ngModel)]="email"
+              placeholder="ejemplo@est.ups.edu.ec">
+
+            <p *ngIf="emailError" class="error-text">
+              El correo debe terminar obligatoriamente en @est.ups.edu.ec
+            </p>
           </div>
         </div>
       </div>
