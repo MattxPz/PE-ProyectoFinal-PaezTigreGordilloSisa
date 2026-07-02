@@ -1,10 +1,24 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
+interface Developer {
+  name: string;
+  github: string;
+}
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [CommonModule, RouterLink],
   templateUrl: './app-footer.html',
   styleUrl: './app-footer.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppFooter {}
+export class AppFooter {
+  developers: Developer[] = [
+    { name: 'David Sisa', github: 'https://github.com/DavidSisa' },
+    { name: 'Carlos Gordillo', github: 'https://github.com/CarlosGordillo' },
+    { name: 'John Tigre', github: 'https://github.com/Tigresitop' },
+    { name: 'Mateo Paez', github: 'https://github.com/MattxPz' },
+  ];
+}

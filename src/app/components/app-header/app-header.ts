@@ -11,5 +11,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppHeader {
-  readonly brand = signal("Proyecto");
+  readonly brand = signal("IA y Desgaste Académico");
 }
