@@ -25,6 +25,9 @@ jobs:
 
       - run: npm run build -- --base-href "/PE-ProyectoFinal-PaezTigreGordilloSisa/"
 
+      - name: Copiar index.html a 404.html (fallback SPA)
+        run: cp dist/ProyectoProbabilidad/browser/index.html dist/ProyectoProbabilidad/browser/404.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/ProyectoProbabilidad/browser
