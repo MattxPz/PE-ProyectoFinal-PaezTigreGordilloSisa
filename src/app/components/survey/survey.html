@@ -1,8 +1,21 @@
 <div class="survey-page">
   <div class="survey-card">
     <h1 class="survey-main-title">Impacto del uso de herramientas de Inteligencia Artificial en el desgaste académico universitario</h1>
-    
-    <form class="survey-form">
+
+    <div *ngIf="submitted()" class="section-divider">
+      <h2>¡Gracias por participar!</h2>
+      <p class="question-text">
+        Tu respuesta fue registrada de forma anónima. Agradecemos tu tiempo y tu aporte a esta investigación académica.
+      </p>
+      
+      <div class="hero-action">
+        <button routerLink="/dashboard" class="btn-primary">
+          Ir a los resultados
+        </button>
+      </div>
+    </div>
+
+    <form class="survey-form" *ngIf="!submitted()">
 
       <div *ngIf="currentSection === 0">
         <div class="section-divider">
@@ -541,15 +554,19 @@
         Por favor, responda todas las preguntas de esta sección antes de continuar.
       </div>
 
+      <div *ngIf="submitError()" class="error-banner">
+        Ocurrió un error al enviar tus respuestas. Por favor, inténtalo nuevamente.
+      </div>
+
       <div class="form-actions">
-        <button *ngIf="currentSection > 0" type="button" (click)="prevSection()" class="btn-secondary">
+        <button *ngIf="currentSection > 0" type="button" (click)="prevSection()" class="btn-secondary" [disabled]="isSubmitting()">
           Anterior
         </button>
         <button *ngIf="currentSection < 6" type="button" (click)="nextSection()" class="btn-primary btn-right">
           Siguiente
         </button>
-        <button *ngIf="currentSection === 6" type="button" (click)="submitSurvey()" class="btn-submit btn-right">
-          Enviar respuestas
+        <button *ngIf="currentSection === 6" type="button" (click)="submitSurvey()" class="btn-submit btn-right" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Enviando...' : 'Enviar respuestas' }}
         </button>
       </div>
 

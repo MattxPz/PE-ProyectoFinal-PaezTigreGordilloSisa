@@ -1,103 +1,46 @@
 <div class="dashboard-page">
   <div class="dashboard-header">
     <h1 class="dashboard-title">Dashboard de Resultados</h1>
-    <p class="dashboard-subtitle">Análisis del impacto de IA en hábitos de estudio</p>
+    <p class="dashboard-subtitle">Análisis del impacto de la IA en hábitos de estudio</p>
   </div>
 
-  <div class="dashboard-grid">
-    
-    <section class="dashboard-card">
-      <div class="card-header">
-        <h2>1. Gráficos Generales (Proporciones)</h2>
-        <div class="filter-group">
-          <button (click)="setFiltro('pastel', 'General')" [class.active]="filtroPastel === 'General'">General</button>
-          <button (click)="setFiltro('pastel', 'Edades')" [class.active]="filtroPastel === 'Edades'">Edades</button>
-          <button (click)="setFiltro('pastel', 'Carrera')" [class.active]="filtroPastel === 'Carrera'">Carrera</button>
-        </div>
-      </div>
-      <div class="chart-container">
-        <p class="chart-info">Mostrando datos para: <strong>{{ filtroPastel }}</strong></p>
-        <div class="css-pie-chart" [ngClass]="'pie-' + filtroPastel.toLowerCase()"></div>
-        <div class="chart-legend">
-          <span class="legend-item"><span class="color-box c1"></span> Alta</span>
-          <span class="legend-item"><span class="color-box c2"></span> Media</span>
-          <span class="legend-item"><span class="color-box c3"></span> Baja</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="dashboard-card">
-      <div class="card-header">
-        <h2>2. Comparativas e Histogramas</h2>
-        <div class="filter-group">
-          <button (click)="setFiltro('barras', 'General')" [class.active]="filtroBarras === 'General'">General</button>
-          <button (click)="setFiltro('barras', 'Edades')" [class.active]="filtroBarras === 'Edades'">Edades</button>
-          <button (click)="setFiltro('barras', 'Carrera')" [class.active]="filtroBarras === 'Carrera'">Carrera</button>
-        </div>
-      </div>
-      <div class="chart-container">
-        <p class="chart-info">Mostrando comparaciones por: <strong>{{ filtroBarras }}</strong></p>
-        <div class="css-bar-chart">
-          <div class="bar-group"><div class="bar bar-blue" style="height: 80%;"><span>80%</span></div><span class="bar-label">Ing.</span></div>
-          <div class="bar-group"><div class="bar bar-blue" style="height: 45%;"><span>45%</span></div><span class="bar-label">Soc.</span></div>
-          <div class="bar-group"><div class="bar bar-blue" style="height: 60%;"><span>60%</span></div><span class="bar-label">Med.</span></div>
-          <div class="bar-group"><div class="bar bar-blue" style="height: 90%;"><span>90%</span></div><span class="bar-label">Dis.</span></div>
-          <div class="bar-group"><div class="bar bar-blue" style="height: 30%;"><span>30%</span></div><span class="bar-label">Arq.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="dashboard-card">
-      <div class="card-header">
-        <h2>3. Evolución del Uso (Tendencia)</h2>
-        <div class="filter-group">
-          <button (click)="setFiltro('tendencia', 'General')" [class.active]="filtroTendencia === 'General'">General</button>
-          <button (click)="setFiltro('tendencia', 'Edades')" [class.active]="filtroTendencia === 'Edades'">Edades</button>
-          <button (click)="setFiltro('tendencia', 'Carrera')" [class.active]="filtroTendencia === 'Carrera'">Carrera</button>
-        </div>
-      </div>
-      <div class="chart-container">
-        <p class="chart-info">Evolución en el ciclo para: <strong>{{ filtroTendencia }}</strong></p>
-        
-        <div class="css-area-chart-wrapper">
-          <div class="css-area-chart" [ngClass]="'area-' + filtroTendencia.toLowerCase()"></div>
-        </div>
-        <div class="chart-labels-x">
-          <span>Mes 1</span>
-          <span>Mes 2</span>
-          <span>Mes 3</span>
-          <span>Mes 4</span>
-          <span>Mes 5</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="dashboard-card card-full-width">
-      <div class="card-header">
-        <h2>4. Mapas de Calor (Distribución de Tiempo)</h2>
-        <div class="filter-group">
-          <button (click)="setFiltro('mapaCalor', 'General')" [class.active]="filtroMapaCalor === 'General'">General</button>
-          <button (click)="setFiltro('mapaCalor', 'Edades')" [class.active]="filtroMapaCalor === 'Edades'">Edades</button>
-          <button (click)="setFiltro('mapaCalor', 'Carrera')" [class.active]="filtroMapaCalor === 'Carrera'">Carrera</button>
-        </div>
-      </div>
-      <div class="chart-container">
-        <p class="chart-info">Intensidad de uso para: <strong>{{ filtroMapaCalor }}</strong></p>
-        <div class="css-heatmap">
-          <div class="hm-label">Lunes</div>
-          <div class="hm-cell hm-lvl-4"></div><div class="hm-cell hm-lvl-2"></div><div class="hm-cell hm-lvl-1"></div><div class="hm-cell hm-lvl-3"></div><div class="hm-cell hm-lvl-5"></div>
-          
-          <div class="hm-label">Miércoles</div>
-          <div class="hm-cell hm-lvl-3"></div><div class="hm-cell hm-lvl-4"></div><div class="hm-cell hm-lvl-2"></div><div class="hm-cell hm-lvl-5"></div><div class="hm-cell hm-lvl-4"></div>
-          
-          <div class="hm-label">Viernes</div>
-          <div class="hm-cell hm-lvl-1"></div><div class="hm-cell hm-lvl-1"></div><div class="hm-cell hm-lvl-3"></div><div class="hm-cell hm-lvl-2"></div><div class="hm-cell hm-lvl-5"></div>
-          
-          <div></div>
-          <div class="hm-label-x">Mañana</div><div class="hm-label-x">Mediodía</div><div class="hm-label-x">Tarde</div><div class="hm-label-x">Noche</div><div class="hm-label-x">Madrug.</div>
-        </div>
-      </div>
-    </section>
-
+  <div *ngIf="cargando()" class="dashboard-status">
+    Cargando resultados...
   </div>
+
+  <div *ngIf="!cargando() && error()" class="dashboard-status dashboard-status-error">
+    {{ error() }}
+  </div>
+
+  <ng-container *ngIf="!cargando() && !error()">
+    <div class="dashboard-stat">
+      <span class="stat-value">{{ totalRespuestas() }}</span>
+      <span class="stat-label">estudiantes han respondido la encuesta</span>
+    </div>
+
+    <div *ngIf="totalRespuestas() === 0" class="dashboard-status">
+      Todavía no hay respuestas registradas. Vuelve pronto para ver los resultados.
+    </div>
+
+    <div *ngFor="let seccion of secciones()" class="dashboard-section">
+      <div class="section-divider">
+        <h2>{{ seccion.titulo }}</h2>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-card" *ngFor="let tarjeta of seccion.tarjetas">
+          <div class="card-header">
+            <h3>{{ tarjeta.titulo }}</h3>
+          </div>
+          <div class="chart-container" [style.height.px]="tarjeta.alto">
+            <canvas baseChart
+              [type]="tarjeta.tipo"
+              [data]="tarjeta.data"
+              [options]="tarjeta.options">
+            </canvas>
+          </div>
+        </section>
+      </div>
+    </div>
+  </ng-container>
 </div>

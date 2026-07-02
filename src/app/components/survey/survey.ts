@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { SurveyService } from '../../services/survey.service';
 
 @Component({
   selector: 'app-survey',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './survey.html',
   styleUrls: ['./survey.css'],
   changeDetection: ChangeDetectionStrategy.Default,
@@ -14,9 +15,14 @@ import { Router } from '@angular/router';
 export class Survey {
 
   private router = inject(Router);
+  private surveyService = inject(SurveyService);
 
   currentSection: number = 0;
   showValidationError: boolean = false;
+
+  isSubmitting = signal(false);
+  submitted = signal(false);
+  submitError = signal(false);
   
   email: string = '';
   emailError: boolean = false;
@@ -156,12 +162,68 @@ export class Survey {
     }
   }
 
-  submitSurvey() {
+  async submitSurvey() {
     this.showValidationError = false;
     if (!this.experienciaAbierta.trim()) {
       this.showValidationError = true;
       return;
     }
-    this.router.navigate(['/dashboard']);
+
+    this.submitError.set(false);
+    this.isSubmitting.set(true);
+
+    const respuestas = {
+      edad: this.edad,
+      genero: this.genero,
+      carrera: this.carrera,
+      semestre: this.semestre,
+      situacionSeleccionada: this.situacionSeleccionada,
+      otraSituacionTexto: this.otraSituacionTexto,
+
+      horasEstudio: this.horasEstudio,
+      horasTrabajo: this.horasTrabajo,
+      horasOcio: this.horasOcio,
+      horasSueno: this.horasSueno,
+
+      utilizaIa: this.utilizaIa,
+      frecuenciaIa: this.frecuenciaIa,
+      ahorroTiempo: this.ahorroTiempo,
+
+      herramientas: this.herramientas,
+      isOtraHerramienta: this.isOtraHerramienta,
+      otraHerramientaTexto: this.otraHerramientaTexto,
+
+      propositos: this.propositos,
+      isOtroProposito: this.isOtroProposito,
+      otroPropositoTexto: this.otroPropositoTexto,
+
+      agotamiento: this.agotamiento,
+      saludEmocional: this.saludEmocional,
+      estresIa: this.estresIa,
+      comprensionIa: this.comprensionIa,
+      dependencia: this.dependencia,
+
+      areaSeleccionada: this.areaSeleccionada,
+      otraAreaTexto: this.otraAreaTexto,
+      productividad: this.productividad,
+      integrarIa: this.integrarIa,
+      aspectoPositivoSeleccionado: this.aspectoPositivoSeleccionado,
+      otroAspectoPositivoTexto: this.otroAspectoPositivoTexto,
+      aspectoNegativoSeleccionado: this.aspectoNegativoSeleccionado,
+      otroAspectoNegativoTexto: this.otroAspectoNegativoTexto,
+
+      experienciaAbierta: this.experienciaAbierta,
+    };
+
+    try {
+      await this.surveyService.guardarRespuesta(respuestas);
+      this.submitted.set(true);
+      window.scrollTo(0, 0);
+    } catch (error) {
+      console.error('Error al guardar la respuesta de la encuesta', error);
+      this.submitError.set(true);
+    } finally {
+      this.isSubmitting.set(false);
+    }
   }
 }
