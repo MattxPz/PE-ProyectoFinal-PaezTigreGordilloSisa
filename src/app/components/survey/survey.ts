@@ -80,7 +80,7 @@ export class Survey {
     this.showValidationError = false;
 
     if (this.currentSection === 0) {
-      if (!this.email.trim().toLowerCase().endsWith('@est.ups.edu.ec')) {
+      if (!this.email.trim().toLowerCase().endsWith('.edu.ec')) {
         this.emailError = true;
         return;
       }
