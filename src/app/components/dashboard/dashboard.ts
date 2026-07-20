@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { collection, getDocs } from 'firebase/firestore';
 import { ChartData, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
@@ -15,11 +16,13 @@ import {
 } from './dashboard.constants';
 
 interface Tarjeta {
+  id: number;
   titulo: string;
-  tipo: 'pie' | 'bar';
-  data: ChartData<any, number[], string>;
-  options: ChartOptions<any>;
+  tipo: 'pie' | 'bar' | 'texto';
+  data?: ChartData<any, number[], string>;
+  options?: ChartOptions<any>;
   alto: number;
+  textos?: string[];
 }
 
 interface Seccion {
@@ -80,7 +83,7 @@ function contarCarreras(respuestas: RespuestaEncuesta[]): { labels: string[]; va
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, BaseChartDirective],
+  imports: [CommonModule, FormsModule, BaseChartDirective],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -93,6 +96,11 @@ export class Dashboard implements OnInit {
   private respuestas = signal<RespuestaEncuesta[]>([]);
 
   totalRespuestas = computed(() => this.respuestas().length);
+
+  // --- Estado del panel de filtros ---
+  panelAbierto = signal(true);
+  busqueda = signal('');
+  seleccionadas = signal<Set<number>>(new Set());
 
   private readonly pieOptions: ChartOptions<'pie'> = {
     responsive: true,
@@ -179,18 +187,22 @@ export class Dashboard implements OnInit {
     return Math.max(220, 40 + nCategorias * 34);
   }
 
-  private tarjetaPastel(titulo: string, campo: keyof RespuestaEncuesta, opciones: (Opcion | OpcionEtiquetada)[]): Tarjeta {
+  private tarjetaPastel(id: number, titulo: string, campo: keyof RespuestaEncuesta, opciones: (Opcion | OpcionEtiquetada)[]): Tarjeta {
     const { labels, valores } = contarOpciones(this.respuestas(), campo, opciones);
-    return { titulo, tipo: 'pie', data: this.pieData(labels, valores), options: this.pieOptions, alto: 280 };
+    return { id, titulo, tipo: 'pie', data: this.pieData(labels, valores), options: this.pieOptions, alto: 280 };
   }
 
-  private tarjetaBarras(titulo: string, campo: keyof RespuestaEncuesta, opciones: (Opcion | OpcionEtiquetada)[]): Tarjeta {
+  private tarjetaBarras(id: number, titulo: string, campo: keyof RespuestaEncuesta, opciones: (Opcion | OpcionEtiquetada)[]): Tarjeta {
     const { labels, valores } = contarOpciones(this.respuestas(), campo, opciones);
-    return { titulo, tipo: 'bar', data: this.barData(labels, valores), options: this.barOptions, alto: this.alto(labels.length) };
+    return { id, titulo, tipo: 'bar', data: this.barData(labels, valores), options: this.barOptions, alto: this.alto(labels.length) };
   }
 
-  private tarjetaBarrasDesde(titulo: string, labels: string[], valores: number[]): Tarjeta {
-    return { titulo, tipo: 'bar', data: this.barData(labels, valores), options: this.barOptions, alto: this.alto(labels.length) };
+  private tarjetaBarrasDesde(id: number, titulo: string, labels: string[], valores: number[]): Tarjeta {
+    return { id, titulo, tipo: 'bar', data: this.barData(labels, valores), options: this.barOptions, alto: this.alto(labels.length) };
+  }
+
+  private tarjetaTexto(id: number, titulo: string, textos: string[]): Tarjeta {
+    return { id, titulo, tipo: 'texto', textos, alto: 0 };
   }
 
   secciones = computed<Seccion[]>(() => {
@@ -201,68 +213,150 @@ export class Dashboard implements OnInit {
       {
         titulo: 'Información general',
         tarjetas: [
-          this.tarjetaPastel('1. Edad', 'edad', EDAD_OPCIONES),
-          this.tarjetaPastel('2. Género', 'genero', GENERO_OPCIONES),
-          this.tarjetaPastel('5. Situación actual', 'situacionSeleccionada', SITUACION_OPCIONES),
-          this.tarjetaBarras('4. Semestre actual', 'semestre', SEMESTRE_OPCIONES),
+          this.tarjetaPastel(1, '1. Edad', 'edad', EDAD_OPCIONES),
+          this.tarjetaPastel(2, '2. Género', 'genero', GENERO_OPCIONES),
           ((): Tarjeta => {
             const { labels, valores } = contarCarreras(r);
-            return this.tarjetaBarrasDesde('3. Carrera universitaria', labels, valores);
+            return this.tarjetaBarrasDesde(3, '3. Carrera universitaria', labels, valores);
           })(),
+          this.tarjetaBarras(4, '4. Semestre actual', 'semestre', SEMESTRE_OPCIONES),
+          this.tarjetaPastel(5, '5. Situación actual', 'situacionSeleccionada', SITUACION_OPCIONES),
         ],
       },
       {
         titulo: 'Distribución del tiempo',
         tarjetas: [
-          this.tarjetaBarras('6. Horas de estudio al día', 'horasEstudio', HORAS_ESTUDIO_OPCIONES),
-          this.tarjetaBarras('7. Horas de trabajo al día', 'horasTrabajo', HORAS_TRABAJO_OPCIONES),
-          this.tarjetaBarras('8. Horas de ocio al día', 'horasOcio', HORAS_OCIO_OPCIONES),
-          this.tarjetaBarras('9. Horas de sueño al día', 'horasSueno', HORAS_SUENO_OPCIONES),
+          this.tarjetaBarras(6, '6. Horas de estudio al día', 'horasEstudio', HORAS_ESTUDIO_OPCIONES),
+          this.tarjetaBarras(7, '7. Horas de trabajo al día', 'horasTrabajo', HORAS_TRABAJO_OPCIONES),
+          this.tarjetaBarras(8, '8. Horas de ocio al día', 'horasOcio', HORAS_OCIO_OPCIONES),
+          this.tarjetaBarras(9, '9. Horas de sueño al día', 'horasSueno', HORAS_SUENO_OPCIONES),
         ],
       },
       {
         titulo: 'Uso de herramientas de IA',
         tarjetas: [
-          this.tarjetaPastel('10. ¿Utiliza IA para actividades académicas?', 'utilizaIa', UTILIZA_IA_OPCIONES),
-          this.tarjetaBarras('11. Frecuencia de uso de IA', 'frecuenciaIa', FRECUENCIA_IA_OPCIONES),
-          this.tarjetaBarras('14. La IA ayuda a ahorrar tiempo académico', 'ahorroTiempo', LIKERT_OPCIONES),
+          this.tarjetaPastel(10, '10. ¿Utiliza IA para actividades académicas?', 'utilizaIa', UTILIZA_IA_OPCIONES),
+          this.tarjetaBarras(11, '11. Frecuencia de uso de IA', 'frecuenciaIa', FRECUENCIA_IA_OPCIONES),
           ((): Tarjeta => {
             const { labels, valores } = contarCheckboxGroup(r, 'herramientas', HERRAMIENTAS_LABELS, 'isOtraHerramienta');
-            return this.tarjetaBarrasDesde('12. Herramientas de IA utilizadas', labels, valores);
+            return this.tarjetaBarrasDesde(12, '12. Herramientas de IA utilizadas', labels, valores);
           })(),
           ((): Tarjeta => {
             const { labels, valores } = contarCheckboxGroup(r, 'propositos', PROPOSITOS_LABELS, 'isOtroProposito');
-            return this.tarjetaBarrasDesde('13. Propósitos de uso de IA', labels, valores);
+            return this.tarjetaBarrasDesde(13, '13. Propósitos de uso de IA', labels, valores);
           })(),
+          this.tarjetaBarras(14, '14. La IA ayuda a ahorrar tiempo académico', 'ahorroTiempo', LIKERT_OPCIONES),
         ],
       },
       {
         titulo: 'Desgaste académico',
         tarjetas: [
-          this.tarjetaBarras('15. Frecuencia de agotamiento académico', 'agotamiento', AGOTAMIENTO_OPCIONES),
-          this.tarjetaBarras('16. La carga académica afecta la salud emocional', 'saludEmocional', LIKERT_OPCIONES),
-          this.tarjetaBarras('17. La IA reduce el estrés académico', 'estresIa', LIKERT_OPCIONES),
-          this.tarjetaBarras('18. La IA ayuda a comprender mejor los temas', 'comprensionIa', COMPRENSION_IA_OPCIONES),
-          this.tarjetaPastel('19. ¿El uso excesivo de IA genera dependencia?', 'dependencia', DEPENDENCIA_OPCIONES),
+          this.tarjetaBarras(15, '15. Frecuencia de agotamiento académico', 'agotamiento', AGOTAMIENTO_OPCIONES),
+          this.tarjetaBarras(16, '16. La carga académica afecta la salud emocional', 'saludEmocional', LIKERT_OPCIONES),
+          this.tarjetaBarras(17, '17. La IA reduce el estrés académico', 'estresIa', LIKERT_OPCIONES),
+          this.tarjetaBarras(18, '18. La IA ayuda a comprender mejor los temas', 'comprensionIa', COMPRENSION_IA_OPCIONES),
+          this.tarjetaPastel(19, '19. ¿El uso excesivo de IA genera dependencia?', 'dependencia', DEPENDENCIA_OPCIONES),
         ],
       },
       {
         titulo: 'Análisis comparativo',
         tarjetas: [
-          this.tarjetaBarras('20. Área académica con más uso de IA', 'areaSeleccionada', AREA_OPCIONES),
-          this.tarjetaBarras('21. La IA mejora la productividad académica', 'productividad', LIKERT_OPCIONES),
-          this.tarjetaPastel('22. ¿Las universidades deberían integrar IA oficialmente?', 'integrarIa', INTEGRAR_IA_OPCIONES),
-          this.tarjetaBarras('23. Aspecto más positivo del uso de IA', 'aspectoPositivoSeleccionado', ASPECTO_POSITIVO_OPCIONES),
-          this.tarjetaBarras('24. Aspecto más negativo del uso de IA', 'aspectoNegativoSeleccionado', ASPECTO_NEGATIVO_OPCIONES),
+          this.tarjetaBarras(20, '20. Área académica con más uso de IA', 'areaSeleccionada', AREA_OPCIONES),
+          this.tarjetaBarras(21, '21. La IA mejora la productividad académica', 'productividad', LIKERT_OPCIONES),
+          this.tarjetaPastel(22, '22. ¿Las universidades deberían integrar IA oficialmente?', 'integrarIa', INTEGRAR_IA_OPCIONES),
+          this.tarjetaBarras(23, '23. Aspecto más positivo del uso de IA', 'aspectoPositivoSeleccionado', ASPECTO_POSITIVO_OPCIONES),
+          this.tarjetaBarras(24, '24. Aspecto más negativo del uso de IA', 'aspectoNegativoSeleccionado', ASPECTO_NEGATIVO_OPCIONES),
+        ],
+      },
+      {
+        titulo: 'Comentarios abiertos',
+        tarjetas: [
+          this.tarjetaTexto(
+            25,
+            '25. Experiencia y sugerencias',
+            r.map((x) => x.experienciaAbierta).filter((t) => !!t && t.trim() !== ''),
+          ),
         ],
       },
     ];
   });
 
+
+  totalPreguntas = computed(() => this.secciones().reduce((acc, s) => acc + s.tarjetas.length, 0));
+  totalSeleccionadas = computed(() => this.seleccionadas().size);
+  todoSeleccionado = computed(() => this.totalPreguntas() > 0 && this.totalSeleccionadas() === this.totalPreguntas());
+
+  seccionesVisibles = computed<Seccion[]>(() => {
+    const sel = this.seleccionadas();
+    return this.secciones()
+      .map((s) => ({ titulo: s.titulo, tarjetas: s.tarjetas.filter((t) => sel.has(t.id)) }))
+      .filter((s) => s.tarjetas.length > 0);
+  });
+
+  estaSeleccionada(id: number): boolean {
+    return this.seleccionadas().has(id);
+  }
+
+  coincideBusqueda(titulo: string): boolean {
+    const q = this.busqueda().trim().toLowerCase();
+    return !q || titulo.toLowerCase().includes(q);
+  }
+
+  grupoTieneCoincidencias(seccion: Seccion): boolean {
+    return seccion.tarjetas.some((t) => this.coincideBusqueda(t.titulo));
+  }
+
+  hayCoincidencias(): boolean {
+    return this.secciones().some((s) => this.grupoTieneCoincidencias(s));
+  }
+
+  preguntasActivas = computed<{ id: number; titulo: string }[]>(() => {
+    const sel = this.seleccionadas();
+    return this.secciones()
+      .flatMap((s) => s.tarjetas)
+      .filter((t) => sel.has(t.id))
+      .map((t) => ({ id: t.id, titulo: t.titulo }));
+  });
+
+  toggleFiltro(id: number) {
+    const nuevo = new Set(this.seleccionadas());
+    if (nuevo.has(id)) nuevo.delete(id);
+    else nuevo.add(id);
+    this.seleccionadas.set(nuevo);
+  }
+
+  seleccionarTodas() {
+    const ids = this.secciones().flatMap((s) => s.tarjetas.map((t) => t.id));
+    this.seleccionadas.set(new Set(ids));
+  }
+
+  quitarTodas() {
+    this.seleccionadas.set(new Set());
+  }
+
+  seccionCompleta(seccion: Seccion): boolean {
+    return seccion.tarjetas.length > 0 && seccion.tarjetas.every((t) => this.seleccionadas().has(t.id));
+  }
+
+  toggleSeccion(seccion: Seccion) {
+    const completa = this.seccionCompleta(seccion);
+    const nuevo = new Set(this.seleccionadas());
+    for (const t of seccion.tarjetas) {
+      if (completa) nuevo.delete(t.id);
+      else nuevo.add(t.id);
+    }
+    this.seleccionadas.set(nuevo);
+  }
+
+  togglePanel() {
+    this.panelAbierto.update((v) => !v);
+  }
+
   async ngOnInit() {
     try {
       const snapshot = await getDocs(collection(this.firestore, 'respuestas'));
       this.respuestas.set(snapshot.docs.map((doc) => doc.data() as RespuestaEncuesta));
+      this.seleccionarTodas();
     } catch (err) {
       console.error('Error al cargar las respuestas de la encuesta', err);
       this.error.set('No se pudieron cargar los resultados. Inténtalo de nuevo más tarde.');
