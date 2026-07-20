@@ -39,6 +39,8 @@ export interface RespuestaEncuesta {
   integrarIa: string;
   aspectoPositivoSeleccionado: string;
   aspectoNegativoSeleccionado: string;
+
+  experienciaAbierta: string;
 }
 
 /** Una opción cuyo valor guardado coincide con el texto a mostrar. */

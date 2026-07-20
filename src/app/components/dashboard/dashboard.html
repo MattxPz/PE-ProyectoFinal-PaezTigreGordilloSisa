@@ -22,25 +22,128 @@
       Todavía no hay respuestas registradas. Vuelve pronto para ver los resultados.
     </div>
 
-    <div *ngFor="let seccion of secciones()" class="dashboard-section">
-      <div class="section-divider">
-        <h2>{{ seccion.titulo }}</h2>
+    <ng-container *ngIf="totalRespuestas() > 0">
+      <!-- Panel de filtros -->
+      <div class="filter-panel">
+        <button class="filter-toggle" type="button" (click)="togglePanel()">
+          <span class="filter-toggle-left">
+            <span class="filter-icon" aria-hidden="true">▤</span>
+            <span class="filter-toggle-text">Filtrar preguntas</span>
+            <span class="filter-count">{{ totalSeleccionadas() }}/{{ totalPreguntas() }}</span>
+          </span>
+          <span class="filter-chevron" [class.filter-chevron-open]="panelAbierto()" aria-hidden="true">⌄</span>
+        </button>
+
+        <div class="filter-body" *ngIf="panelAbierto()">
+          <div class="filter-toolbar">
+            <input
+              type="text"
+              class="filter-search"
+              placeholder="Buscar pregunta... (ej. carrera, computación, estrés)"
+              [ngModel]="busqueda()"
+              (ngModelChange)="busqueda.set($event)"
+            />
+            <div class="filter-actions">
+              <button type="button" class="filter-btn" (click)="seleccionarTodas()" [disabled]="todoSeleccionado()">
+                Seleccionar todas
+              </button>
+              <button type="button" class="filter-btn filter-btn-ghost" (click)="quitarTodas()" [disabled]="totalSeleccionadas() === 0">
+                Quitar todas
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-sections-quick">
+            <button
+              type="button"
+              class="filter-section-btn"
+              *ngFor="let seccion of secciones()"
+              [class.filter-section-btn-active]="seccionCompleta(seccion)"
+              (click)="toggleSeccion(seccion)"
+            >
+              {{ seccion.titulo }}
+            </button>
+          </div>
+
+          <div class="filter-status" *ngIf="busqueda().trim().length === 0">
+            <p class="filter-status-text" *ngIf="todoSeleccionado()">
+              Mostrando las {{ totalPreguntas() }} preguntas. Escribe arriba para buscar una en particular.
+            </p>
+            <p class="filter-status-text" *ngIf="totalSeleccionadas() === 0">
+              No hay preguntas activas. Busca una pregunta o elige una sección arriba.
+            </p>
+            <div class="filter-active-chips" *ngIf="!todoSeleccionado() && totalSeleccionadas() > 0">
+              <button
+                type="button"
+                class="filter-chip filter-chip-active"
+                *ngFor="let p of preguntasActivas()"
+                (click)="toggleFiltro(p.id)"
+                title="Quitar del filtro"
+              >
+                {{ p.titulo }} <span class="filter-chip-x" aria-hidden="true">✕</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-groups" *ngIf="busqueda().trim().length > 0">
+            <p class="filter-sin-resultados" *ngIf="!hayCoincidencias()">
+              No se encontraron preguntas con "{{ busqueda() }}".
+            </p>
+
+            <div class="filter-group" *ngFor="let seccion of secciones()" [hidden]="!grupoTieneCoincidencias(seccion)">
+              <div class="filter-group-header-static">{{ seccion.titulo }}</div>
+              <div class="filter-chips">
+                <button
+                  type="button"
+                  class="filter-chip"
+                  *ngFor="let tarjeta of seccion.tarjetas"
+                  [hidden]="!coincideBusqueda(tarjeta.titulo)"
+                  [class.filter-chip-active]="estaSeleccionada(tarjeta.id)"
+                  (click)="toggleFiltro(tarjeta.id)"
+                >
+                  {{ tarjeta.titulo }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="dashboard-grid">
-        <section class="dashboard-card" *ngFor="let tarjeta of seccion.tarjetas">
-          <div class="card-header">
-            <h3>{{ tarjeta.titulo }}</h3>
-          </div>
-          <div class="chart-container" [style.height.px]="tarjeta.alto">
-            <canvas baseChart
-              [type]="tarjeta.tipo"
-              [data]="tarjeta.data"
-              [options]="tarjeta.options">
-            </canvas>
-          </div>
-        </section>
+      <div *ngIf="seccionesVisibles().length === 0" class="dashboard-status">
+        No hay preguntas seleccionadas. Activa al menos un filtro arriba para ver resultados.
       </div>
-    </div>
+
+      <div *ngFor="let seccion of seccionesVisibles()" class="dashboard-section">
+        <div class="section-divider">
+          <h2>{{ seccion.titulo }}</h2>
+        </div>
+
+        <div class="dashboard-grid">
+          <section class="dashboard-card" *ngFor="let tarjeta of seccion.tarjetas" [class.dashboard-card-texto]="tarjeta.tipo === 'texto'">
+            <div class="card-header">
+              <h3>{{ tarjeta.titulo }}</h3>
+            </div>
+
+            <div class="chart-container" *ngIf="tarjeta.tipo !== 'texto'" [style.height.px]="tarjeta.alto">
+              <canvas baseChart
+                [type]="tarjeta.tipo"
+                [data]="tarjeta.data"
+                [options]="tarjeta.options">
+              </canvas>
+            </div>
+
+            <div class="texto-container" *ngIf="tarjeta.tipo === 'texto'">
+              <p class="texto-vacio" *ngIf="tarjeta.textos!.length === 0">
+                Todavía nadie ha dejado un comentario en esta pregunta.
+              </p>
+              <p class="texto-contador" *ngIf="tarjeta.textos!.length > 0">
+                {{ tarjeta.textos!.length }} comentario(s)
+              </p>
+              <div class="texto-item" *ngFor="let comentario of tarjeta.textos">“{{ comentario }}”</div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </ng-container>
   </ng-container>
 </div>
