@@ -29,7 +29,8 @@
           <span class="filter-toggle-left">
             <span class="filter-icon" aria-hidden="true">▤</span>
             <span class="filter-toggle-text">Filtrar preguntas</span>
-            <span class="filter-count">{{ totalSeleccionadas() }}/{{ totalPreguntas() }}</span>
+            <span class="filter-count" *ngIf="totalSeleccionadas() > 0">{{ totalSeleccionadas() }}/{{ totalPreguntas() }}</span>
+            <span class="filter-count" *ngIf="totalSeleccionadas() === 0">Todas</span>
           </span>
           <span class="filter-chevron" [class.filter-chevron-open]="panelAbierto()" aria-hidden="true">⌄</span>
         </button>
@@ -66,11 +67,11 @@
           </div>
 
           <div class="filter-status" *ngIf="busqueda().trim().length === 0">
-            <p class="filter-status-text" *ngIf="todoSeleccionado()">
-              Mostrando las {{ totalPreguntas() }} preguntas. Escribe arriba para buscar una en particular.
-            </p>
             <p class="filter-status-text" *ngIf="totalSeleccionadas() === 0">
-              No hay preguntas activas. Busca una pregunta o elige una sección arriba.
+              Mostrando todas las {{ totalPreguntas() }} preguntas. Selecciona una pregunta o sección arriba para filtrar.
+            </p>
+            <p class="filter-status-text" *ngIf="todoSeleccionado()">
+              Mostrando las {{ totalPreguntas() }} preguntas (todas seleccionadas explícitamente).
             </p>
             <div class="filter-active-chips" *ngIf="!todoSeleccionado() && totalSeleccionadas() > 0">
               <button
@@ -109,41 +110,156 @@
         </div>
       </div>
 
-      <div *ngIf="seccionesVisibles().length === 0" class="dashboard-status">
-        No hay preguntas seleccionadas. Activa al menos un filtro arriba para ver resultados.
+      <!-- Panel de segmentación de datos (qué estudiantes se cuentan) -->
+      <div class="filter-panel filter-panel-datos">
+        <button class="filter-toggle" type="button" (click)="togglePanelDatos()">
+          <span class="filter-toggle-left">
+            <span class="filter-icon" aria-hidden="true">👥</span>
+            <span class="filter-toggle-text">Segmentar estudiantes</span>
+            <span class="filter-count" *ngIf="hayFiltrosDatosActivos()">{{ totalFiltradas() }}/{{ totalRespuestas() }}</span>
+          </span>
+          <span class="filter-chevron" [class.filter-chevron-open]="panelDatosAbierto()" aria-hidden="true">⌄</span>
+        </button>
+
+        <div class="filter-body" *ngIf="panelDatosAbierto()">
+          <div class="filter-toolbar">
+            <p class="filter-status-text" style="margin: 0;">
+              Filtra qué estudiantes se cuentan en los gráficos (ej. edad, género, horas de estudio). No afecta qué preguntas se muestran.
+            </p>
+            <div class="filter-actions">
+              <button type="button" class="filter-btn filter-btn-ghost" (click)="limpiarFiltrosDatos()" [disabled]="!hayFiltrosDatosActivos()">
+                Limpiar filtros
+              </button>
+            </div>
+          </div>
+
+          <p class="filter-status-text" *ngIf="camposActivosSegunSeleccion() !== null">
+            Mostrando solo los criterios relacionados con las preguntas seleccionadas arriba.
+          </p>
+
+          <p class="filter-sin-resultados" *ngIf="camposActivosSegunSeleccion() !== null && gruposFiltroVisibles().length === 0 && !semestreRelevante()">
+            Las preguntas seleccionadas no tienen criterios de segmentación asociados.
+          </p>
+
+          <div class="filter-datos-group" *ngFor="let grupo of gruposFiltroVisibles()">
+            <div class="filter-group-header-static">
+              {{ grupo.titulo }}
+              <span class="filter-count" *ngIf="cantidadActivaEnGrupo(grupo.campo) > 0">{{ cantidadActivaEnGrupo(grupo.campo) }}</span>
+            </div>
+
+            <input
+              *ngIf="grupo.buscador"
+              type="text"
+              class="filter-search filter-search-inline"
+              placeholder="Buscar carrera..."
+              [ngModel]="busquedaCarrera()"
+              (ngModelChange)="busquedaCarrera.set($event)"
+            />
+
+            <div class="filter-umbral" *ngIf="grupo.umbral">
+              <input
+                type="number"
+                min="0"
+                class="filter-umbral-input"
+                placeholder="N° horas"
+                [ngModel]="umbralInput(grupo.campo)"
+                (ngModelChange)="setUmbralInput(grupo.campo, $event)"
+              />
+              <button type="button" class="filter-btn filter-btn-ghost filter-btn-small" (click)="aplicarUmbral(grupo, 'menorQue')">
+                Menos de N horas
+              </button>
+              <button type="button" class="filter-btn filter-btn-ghost filter-btn-small" (click)="aplicarUmbral(grupo, 'mayorQue')">
+                Más de N horas
+              </button>
+            </div>
+
+            <div class="filter-chips">
+              <button
+                type="button"
+                class="filter-chip"
+                *ngFor="let opcion of grupo.opciones"
+                [hidden]="grupo.buscador && !coincideBusquedaCarrera(opcion.label)"
+                [class.filter-chip-active]="estaFiltroDatoActivo(grupo.campo, opcion.value)"
+                (click)="toggleFiltroDato(grupo.campo, opcion.value)"
+              >
+                {{ opcion.label }}
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-datos-group" *ngIf="semestreRelevante()">
+            <div class="filter-group-header-static">Semestre actual (rango)</div>
+            <div class="filter-rango">
+              <input
+                type="number"
+                min="1"
+                max="10"
+                class="filter-umbral-input"
+                placeholder="Mín."
+                [ngModel]="filtrosDatos().semestreMin"
+                (ngModelChange)="setSemestreMin($event)"
+              />
+              <span>—</span>
+              <input
+                type="number"
+                min="1"
+                max="10"
+                class="filter-umbral-input"
+                placeholder="Máx."
+                [ngModel]="filtrosDatos().semestreMax"
+                (ngModelChange)="setSemestreMax($event)"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div *ngFor="let seccion of seccionesVisibles()" class="dashboard-section">
-        <div class="section-divider">
-          <h2>{{ seccion.titulo }}</h2>
-        </div>
-
-        <div class="dashboard-grid">
-          <section class="dashboard-card" *ngFor="let tarjeta of seccion.tarjetas" [class.dashboard-card-texto]="tarjeta.tipo === 'texto'">
-            <div class="card-header">
-              <h3>{{ tarjeta.titulo }}</h3>
-            </div>
-
-            <div class="chart-container" *ngIf="tarjeta.tipo !== 'texto'" [style.height.px]="tarjeta.alto">
-              <canvas baseChart
-                [type]="tarjeta.tipo"
-                [data]="tarjeta.data"
-                [options]="tarjeta.options">
-              </canvas>
-            </div>
-
-            <div class="texto-container" *ngIf="tarjeta.tipo === 'texto'">
-              <p class="texto-vacio" *ngIf="tarjeta.textos!.length === 0">
-                Todavía nadie ha dejado un comentario en esta pregunta.
-              </p>
-              <p class="texto-contador" *ngIf="tarjeta.textos!.length > 0">
-                {{ tarjeta.textos!.length }} comentario(s)
-              </p>
-              <div class="texto-item" *ngFor="let comentario of tarjeta.textos">“{{ comentario }}”</div>
-            </div>
-          </section>
-        </div>
+      <div class="dashboard-stat dashboard-stat-sub" *ngIf="hayFiltrosDatosActivos()">
+        <span class="stat-value">{{ totalFiltradas() }}</span>
+        <span class="stat-label">de {{ totalRespuestas() }} estudiantes cumplen estos criterios de segmentación</span>
       </div>
+
+      <div *ngIf="totalFiltradas() === 0" class="dashboard-status">
+        No hay estudiantes que cumplan estos criterios. Ajusta o limpia los filtros de segmentación.
+      </div>
+
+      <ng-container *ngIf="totalFiltradas() > 0">
+        <div *ngIf="seccionesVisibles().length === 0" class="dashboard-status">
+          No hay preguntas seleccionadas. Activa al menos un filtro arriba para ver resultados.
+        </div>
+
+        <div *ngFor="let seccion of seccionesVisibles()" class="dashboard-section">
+          <div class="section-divider">
+            <h2>{{ seccion.titulo }}</h2>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="dashboard-card" *ngFor="let tarjeta of seccion.tarjetas" [class.dashboard-card-texto]="tarjeta.tipo === 'texto'">
+              <div class="card-header">
+                <h3>{{ tarjeta.titulo }}</h3>
+              </div>
+
+              <div class="chart-container" *ngIf="tarjeta.tipo !== 'texto'" [style.height.px]="tarjeta.alto">
+                <canvas baseChart
+                  [type]="tarjeta.tipo"
+                  [data]="tarjeta.data"
+                  [options]="tarjeta.options">
+                </canvas>
+              </div>
+
+              <div class="texto-container" *ngIf="tarjeta.tipo === 'texto'">
+                <p class="texto-vacio" *ngIf="tarjeta.textos!.length === 0">
+                  Todavía nadie ha dejado un comentario en esta pregunta.
+                </p>
+                <p class="texto-contador" *ngIf="tarjeta.textos!.length > 0">
+                  {{ tarjeta.textos!.length }} comentario(s)
+                </p>
+                <div class="texto-item" *ngFor="let comentario of tarjeta.textos">“{{ comentario }}”</div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>

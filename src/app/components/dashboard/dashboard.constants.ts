@@ -66,6 +66,20 @@ export const SEMESTRE_OPCIONES: OpcionEtiquetada[] = [
 
 export const SITUACION_OPCIONES: Opcion[] = ['Solo estudio', 'Estudio y trabajo', 'Solo trabajo', 'Otra'];
 
+/** Mismo catálogo del <select> de carrera en el formulario de la encuesta (survey.html). */
+export const CARRERA_OPCIONES: Opcion[] = [
+  'Administracion de Empresas', 'Agricultura', 'Alimentos', 'Antropologia', 'Arquitectura',
+  'Biomedicina', 'Bioquimica y Farmacia', 'Biotecnologia', 'Ciencia de Datos', 'Ciencias Politicas',
+  'Comercio Exterior', 'Comunicacion', 'Computacion', 'Contabilidad y Auditoria', 'Derecho',
+  'Diseño Multimedia', 'Economia', 'Educacion', 'Educacion Basica', 'Educacion Interultural Bilingue',
+  'Educacion Temprana', 'Electronica y Automatizacion', 'Enfermeria', 'Finanzas', 'Fisioterapia',
+  'Gestion Ambiental', 'Ingenieria Automotriz', 'Ingenieria Civil', 'Ingenieria de la Produccion',
+  'Ingenieria Electrica', 'Ingenieria Industrial', 'Ingenieria en Redes Inteligentes y Ciberseguridad',
+  'Ingenieria en Software', 'Ingenieria Mecanica', 'Marketing e Inteligencia de Mercados', 'Mecatronica',
+  'Medicina Veterinaria', 'Negocios Digitales', 'Odontologia', 'Pedagogia Deportiva', 'Psicologia',
+  'Psicologia Clinica', 'Seguridad de la Informacion', 'Teologia', 'Trabajo Social',
+];
+
 export const HORAS_ESTUDIO_OPCIONES: Opcion[] = ['Menos de 1 hora', '1-2 horas', '3-4 horas', '5-6 horas', 'Más de 6 horas'];
 export const HORAS_TRABAJO_OPCIONES: Opcion[] = ['No trabajo', '1-3 horas', '4-6 horas', '7-8 horas', 'Más de 8 horas'];
 export const HORAS_OCIO_OPCIONES: Opcion[] = ['Menos de 1 hora', '1-2 horas', '3-4 horas', 'Más de 4 horas'];

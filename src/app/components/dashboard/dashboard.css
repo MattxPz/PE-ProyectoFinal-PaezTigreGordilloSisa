@@ -301,6 +301,62 @@
   color: #ffffff;
 }
 
+/* --- Panel de segmentación de datos --- */
+.dashboard-stat-sub {
+  border-top-color: #10b981;
+  padding: 1.1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-stat-sub .stat-value {
+  font-size: 1.9rem;
+  color: #10b981;
+}
+
+.filter-datos-group {
+  padding: 1rem 0;
+  border-top: 1px solid #f1f2f4;
+}
+
+.filter-datos-group:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.filter-search-inline {
+  margin-bottom: 0.75rem;
+  max-width: 320px;
+}
+
+.filter-umbral {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.filter-umbral-input {
+  width: 90px;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #111827;
+}
+
+.filter-btn-small {
+  padding: 0.45rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+.filter-rango {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #6b7280;
+}
+
 .dashboard-section {
   max-width: 1400px;
   margin: 0 auto 3rem;
