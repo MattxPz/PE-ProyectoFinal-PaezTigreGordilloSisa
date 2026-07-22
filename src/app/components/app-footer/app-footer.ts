@@ -16,8 +16,8 @@ interface Developer {
 })
 export class AppFooter {
   developers: Developer[] = [
-    { name: 'David Sisa', github: 'https://github.com/DavidSisa' },
-    { name: 'Carlos Gordillo', github: 'https://github.com/CarlosGordillo' },
+    { name: 'David Sisa', github: 'https://github.com/Riiiiii1' },
+    { name: 'Carlos Gordillo', github: 'https://github.com/antonikr8s' },
     { name: 'John Tigre', github: 'https://github.com/Tigresitop' },
     { name: 'Mateo Paez', github: 'https://github.com/MattxPz' },
   ];
