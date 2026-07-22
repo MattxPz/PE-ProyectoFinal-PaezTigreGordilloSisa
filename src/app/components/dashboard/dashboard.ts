@@ -438,13 +438,13 @@ export class Dashboard implements OnInit {
     return !q || label.toLowerCase().includes(q);
   }
 
-  setSemestreMin(valor: string) {
-    const n = valor.trim() === '' ? null : Number(valor);
+  setSemestreMin(valor: string | number | null) {
+    const n = valor == null || String(valor).trim() === '' ? null : Number(valor);
     this.filtrosDatos.update((f) => ({ ...f, semestreMin: n != null && Number.isNaN(n) ? null : n }));
   }
 
-  setSemestreMax(valor: string) {
-    const n = valor.trim() === '' ? null : Number(valor);
+  setSemestreMax(valor: string | number | null) {
+    const n = valor == null || String(valor).trim() === '' ? null : Number(valor);
     this.filtrosDatos.update((f) => ({ ...f, semestreMax: n != null && Number.isNaN(n) ? null : n }));
   }
 
