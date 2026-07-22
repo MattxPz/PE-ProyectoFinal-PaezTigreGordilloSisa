@@ -234,59 +234,59 @@ export class Dashboard implements OnInit {
       {
         titulo: 'Información general',
         tarjetas: [
-          this.tarjetaPastel(1, '1. Edad', 'edad', EDAD_OPCIONES, r),
-          this.tarjetaPastel(2, '2. Género', 'genero', GENERO_OPCIONES, r),
+          this.tarjetaPastel(1, '1. Edad de los estudiantes encuestados', 'edad', EDAD_OPCIONES, r),
+          this.tarjetaPastel(2, '2. Género de los estudiantes encuestados', 'genero', GENERO_OPCIONES, r),
           ((): Tarjeta => {
             const { labels, valores } = contarCarreras(r);
-            return this.tarjetaBarrasDesde(3, '3. Carrera universitaria', labels, valores, 'carrera');
+            return this.tarjetaBarrasDesde(3, '3. Carrera universitaria de los estudiantes encuestados', labels, valores, 'carrera');
           })(),
-          this.tarjetaBarras(4, '4. Semestre actual', 'semestre', SEMESTRE_OPCIONES, r),
-          this.tarjetaPastel(5, '5. Situación actual', 'situacionSeleccionada', SITUACION_OPCIONES, r),
+          this.tarjetaBarras(4, '4. Semestre actual que cursan los estudiantes encuestados', 'semestre', SEMESTRE_OPCIONES, r),
+          this.tarjetaPastel(5, '5. Situación actual de los estudiantes encuestados (solo estudia, estudia y trabaja, etc.)', 'situacionSeleccionada', SITUACION_OPCIONES, r),
         ],
       },
       {
         titulo: 'Distribución del tiempo',
         tarjetas: [
-          this.tarjetaBarras(6, '6. Horas de estudio al día', 'horasEstudio', HORAS_ESTUDIO_OPCIONES, r),
-          this.tarjetaBarras(7, '7. Horas de trabajo al día', 'horasTrabajo', HORAS_TRABAJO_OPCIONES, r),
-          this.tarjetaBarras(8, '8. Horas de ocio al día', 'horasOcio', HORAS_OCIO_OPCIONES, r),
-          this.tarjetaBarras(9, '9. Horas de sueño al día', 'horasSueno', HORAS_SUENO_OPCIONES, r),
+          this.tarjetaBarras(6, '6. Horas al día que los estudiantes dedican a estudiar', 'horasEstudio', HORAS_ESTUDIO_OPCIONES, r),
+          this.tarjetaBarras(7, '7. Horas al día que los estudiantes dedican a trabajar', 'horasTrabajo', HORAS_TRABAJO_OPCIONES, r),
+          this.tarjetaBarras(8, '8. Horas al día que los estudiantes dedican al ocio', 'horasOcio', HORAS_OCIO_OPCIONES, r),
+          this.tarjetaBarras(9, '9. Horas al día que los estudiantes duermen', 'horasSueno', HORAS_SUENO_OPCIONES, r),
         ],
       },
       {
         titulo: 'Uso de herramientas de IA',
         tarjetas: [
-          this.tarjetaPastel(10, '10. ¿Utiliza IA para actividades académicas?', 'utilizaIa', UTILIZA_IA_OPCIONES, r),
-          this.tarjetaBarras(11, '11. Frecuencia de uso de IA', 'frecuenciaIa', FRECUENCIA_IA_OPCIONES, r),
+          this.tarjetaPastel(10, '10. ¿Los estudiantes usan IA para sus actividades académicas?', 'utilizaIa', UTILIZA_IA_OPCIONES, r),
+          this.tarjetaBarras(11, '11. Con qué frecuencia usan IA los estudiantes', 'frecuenciaIa', FRECUENCIA_IA_OPCIONES, r),
           ((): Tarjeta => {
             const { labels, valores } = contarCheckboxGroup(r, 'herramientas', HERRAMIENTAS_LABELS, 'isOtraHerramienta');
-            return this.tarjetaBarrasDesde(12, '12. Herramientas de IA utilizadas', labels, valores, 'herramientas');
+            return this.tarjetaBarrasDesde(12, '12. Qué herramientas de IA utilizan los estudiantes', labels, valores, 'herramientas');
           })(),
           ((): Tarjeta => {
             const { labels, valores } = contarCheckboxGroup(r, 'propositos', PROPOSITOS_LABELS, 'isOtroProposito');
-            return this.tarjetaBarrasDesde(13, '13. Propósitos de uso de IA', labels, valores, 'propositos');
+            return this.tarjetaBarrasDesde(13, '13. Para qué usan la IA los estudiantes', labels, valores, 'propositos');
           })(),
-          this.tarjetaBarras(14, '14. La IA ayuda a ahorrar tiempo académico', 'ahorroTiempo', LIKERT_OPCIONES, r),
+          this.tarjetaBarras(14, '14. ¿La IA les ayuda a ahorrar tiempo en sus estudios?', 'ahorroTiempo', LIKERT_OPCIONES, r),
         ],
       },
       {
         titulo: 'Desgaste académico',
         tarjetas: [
-          this.tarjetaBarras(15, '15. Frecuencia de agotamiento académico', 'agotamiento', AGOTAMIENTO_OPCIONES, r),
-          this.tarjetaBarras(16, '16. La carga académica afecta la salud emocional', 'saludEmocional', LIKERT_OPCIONES, r),
-          this.tarjetaBarras(17, '17. La IA reduce el estrés académico', 'estresIa', LIKERT_OPCIONES, r),
-          this.tarjetaBarras(18, '18. La IA ayuda a comprender mejor los temas', 'comprensionIa', COMPRENSION_IA_OPCIONES, r),
-          this.tarjetaPastel(19, '19. ¿El uso excesivo de IA genera dependencia?', 'dependencia', DEPENDENCIA_OPCIONES, r),
+          this.tarjetaBarras(15, '15. Con qué frecuencia los estudiantes sienten agotamiento académico', 'agotamiento', AGOTAMIENTO_OPCIONES, r),
+          this.tarjetaBarras(16, '16. ¿La carga académica afecta la salud emocional de los estudiantes?', 'saludEmocional', LIKERT_OPCIONES, r),
+          this.tarjetaBarras(17, '17. ¿La IA reduce el estrés académico de los estudiantes?', 'estresIa', LIKERT_OPCIONES, r),
+          this.tarjetaBarras(18, '18. ¿La IA ayuda a los estudiantes a comprender mejor los temas?', 'comprensionIa', COMPRENSION_IA_OPCIONES, r),
+          this.tarjetaPastel(19, '19. ¿Los estudiantes creen que el uso excesivo de IA genera dependencia?', 'dependencia', DEPENDENCIA_OPCIONES, r),
         ],
       },
       {
         titulo: 'Análisis comparativo',
         tarjetas: [
-          this.tarjetaBarras(20, '20. Área académica con más uso de IA', 'areaSeleccionada', AREA_OPCIONES, r),
-          this.tarjetaBarras(21, '21. La IA mejora la productividad académica', 'productividad', LIKERT_OPCIONES, r),
-          this.tarjetaPastel(22, '22. ¿Las universidades deberían integrar IA oficialmente?', 'integrarIa', INTEGRAR_IA_OPCIONES, r),
-          this.tarjetaBarras(23, '23. Aspecto más positivo del uso de IA', 'aspectoPositivoSeleccionado', ASPECTO_POSITIVO_OPCIONES, r),
-          this.tarjetaBarras(24, '24. Aspecto más negativo del uso de IA', 'aspectoNegativoSeleccionado', ASPECTO_NEGATIVO_OPCIONES, r),
+          this.tarjetaBarras(20, '20. En qué área académica los estudiantes usan más la IA', 'areaSeleccionada', AREA_OPCIONES, r),
+          this.tarjetaBarras(21, '21. ¿La IA mejora la productividad académica de los estudiantes?', 'productividad', LIKERT_OPCIONES, r),
+          this.tarjetaPastel(22, '22. ¿Los estudiantes creen que las universidades deberían integrar la IA oficialmente?', 'integrarIa', INTEGRAR_IA_OPCIONES, r),
+          this.tarjetaBarras(23, '23. Cuál es el aspecto más positivo del uso de IA, según los estudiantes', 'aspectoPositivoSeleccionado', ASPECTO_POSITIVO_OPCIONES, r),
+          this.tarjetaBarras(24, '24. Cuál es el aspecto más negativo del uso de IA, según los estudiantes', 'aspectoNegativoSeleccionado', ASPECTO_NEGATIVO_OPCIONES, r),
         ],
       },
       {
@@ -294,7 +294,7 @@ export class Dashboard implements OnInit {
         tarjetas: [
           this.tarjetaTexto(
             25,
-            '25. Experiencia y sugerencias',
+            '25. Experiencias y sugerencias de los estudiantes encuestados',
             r.map((x) => x.experienciaAbierta).filter((t) => !!t && t.trim() !== ''),
           ),
         ],
