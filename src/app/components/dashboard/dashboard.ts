@@ -321,14 +321,18 @@ export class Dashboard implements OnInit {
       .filter((s) => s.tarjetas.length > 0);
   });
 
-  carrerasDisponibles = computed<{ value: string; label: string }[]>(() => {
-    const set = new Set<string>();
-    for (const r of this.respuestas()) {
-      if (r.carrera && r.carrera.trim()) set.add(r.carrera.trim());
-    }
-    return [...set].sort((a, b) => a.localeCompare(b, 'es')).map((c) => ({ value: c, label: c }));
-  });
-
+carrerasDisponibles = computed<{ value: string; label: string }[]>(() => {
+  const mapa = new Map<string, string>(); // clave: normalizada (minúsculas) -> label a mostrar
+  for (const r of this.respuestas()) {
+    const c = r.carrera?.trim();
+    if (!c) continue;
+    const key = c.toLowerCase();
+    if (!mapa.has(key)) mapa.set(key, c); // usa la primera variante encontrada como texto visible
+  }
+  return [...mapa.entries()]
+    .sort((a, b) => a[1].localeCompare(b[1], 'es'))
+    .map(([value, label]) => ({ value, label }));
+});
 
   /**
    * Campos de segmentación relevantes según las preguntas actualmente seleccionadas.

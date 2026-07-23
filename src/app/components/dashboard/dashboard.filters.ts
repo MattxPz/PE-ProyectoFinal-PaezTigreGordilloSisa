@@ -177,7 +177,7 @@ function pasaGrupoBooleano(claves: Set<string>, mapa: Record<string, boolean> | 
 export function respuestaCumpleFiltros(r: RespuestaEncuesta, f: FiltrosDatos): boolean {
   if (!pasaMultiSelect(f.edad, r.edad)) return false;
   if (!pasaMultiSelect(f.genero, r.genero)) return false;
-  if (!pasaMultiSelect(f.carrera, r.carrera?.trim())) return false;
+if (!pasaMultiSelect(f.carrera, r.carrera?.trim().toLowerCase())) return false;
   if (!pasaMultiSelect(f.areaSeleccionada, r.areaSeleccionada)) return false;
   if (!pasaMultiSelect(f.situacionSeleccionada, r.situacionSeleccionada)) return false;
   if (!pasaMultiSelect(f.horasEstudio, r.horasEstudio)) return false;
