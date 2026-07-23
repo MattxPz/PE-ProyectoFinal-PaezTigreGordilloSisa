@@ -39,7 +39,7 @@ export class Survey {
   horasOcio: string = '';
   horasSueno: string = '';
 
-  utilizaIa: string = '';
+  utilizaIa: boolean | null = null;
   frecuenciaIa: string = '';
   ahorroTiempo: string = '';
 
@@ -86,7 +86,7 @@ export class Survey {
       }
       this.emailError = false;
     } else if (this.currentSection === 1) {
-      if (!this.edad || !this.genero || !this.carrera.trim() || !this.semestre || !this.situacionSeleccionada || (this.situacionSeleccionada === 'Otra' && !this.otraSituacionTexto.trim())) {
+      if (!this.edad || !this.genero || !this.carrera.trim() || !this.semestre || !this.situacionSeleccionada || (this.situacionSeleccionada === 'Otro' && !this.otraSituacionTexto.trim())) {
         this.showValidationError = true;
         return;
       }
@@ -96,7 +96,7 @@ export class Survey {
         return;
       }
     } else if (this.currentSection === 3) {
-      if (!this.utilizaIa || !this.frecuenciaIa || !this.ahorroTiempo || !this.hasHerramientas || !this.hasPropositos) {
+      if (this.utilizaIa === null || !this.frecuenciaIa || !this.ahorroTiempo || !this.hasHerramientas || !this.hasPropositos) {
         this.showValidationError = true;
         return;
       }
@@ -106,7 +106,7 @@ export class Survey {
         return;
       }
     } else if (this.currentSection === 5) {
-      if (!this.areaSeleccionada || (this.areaSeleccionada === 'Otra' && !this.otraAreaTexto.trim()) || !this.productividad || !this.integrarIa || !this.aspectoPositivoSeleccionado || (this.aspectoPositivoSeleccionado === 'Otra' && !this.otroAspectoPositivoTexto.trim()) || !this.aspectoNegativoSeleccionado || (this.aspectoNegativoSeleccionado === 'Otra' && !this.otroAspectoNegativoTexto.trim())) {
+      if (!this.areaSeleccionada || (this.areaSeleccionada === 'Otro' && !this.otraAreaTexto.trim()) || !this.productividad || !this.integrarIa || !this.aspectoPositivoSeleccionado || (this.aspectoPositivoSeleccionado === 'Otro' && !this.otroAspectoPositivoTexto.trim()) || !this.aspectoNegativoSeleccionado || (this.aspectoNegativoSeleccionado === 'Otro' && !this.otroAspectoNegativoTexto.trim())) {
         this.showValidationError = true;
         return;
       }
@@ -127,7 +127,7 @@ export class Survey {
   }
 
   onSituacionChange() {
-    if (this.situacionSeleccionada !== 'Otra') {
+    if (this.situacionSeleccionada !== 'Otro') {
       this.otraSituacionTexto = '';
     }
   }
@@ -145,19 +145,19 @@ export class Survey {
   }
 
   onAreaChange() {
-    if (this.areaSeleccionada !== 'Otra') {
+     if (this.areaSeleccionada !== 'Otro') {
       this.otraAreaTexto = '';
     }
   }
 
   onAspectoPositivoChange() {
-    if (this.aspectoPositivoSeleccionado !== 'Otra') {
+    if (this.aspectoPositivoSeleccionado !== 'Otro') {
       this.otroAspectoPositivoTexto = '';
     }
   }
 
   onAspectoNegativoChange() {
-    if (this.aspectoNegativoSeleccionado !== 'Otra') {
+    if (this.aspectoNegativoSeleccionado !== 'Otro'){
       this.otroAspectoNegativoTexto = '';
     }
   }

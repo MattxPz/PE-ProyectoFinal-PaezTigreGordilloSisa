@@ -184,7 +184,7 @@ export function respuestaCumpleFiltros(r: RespuestaEncuesta, f: FiltrosDatos): b
   if (!pasaMultiSelect(f.horasTrabajo, r.horasTrabajo)) return false;
   if (!pasaMultiSelect(f.horasOcio, r.horasOcio)) return false;
   if (!pasaMultiSelect(f.horasSueno, r.horasSueno)) return false;
-  if (!pasaMultiSelect(f.utilizaIa, r.utilizaIa)) return false;
+  if (!pasaMultiSelect(f.utilizaIa, String(r.utilizaIa))) return false;
   if (!pasaMultiSelect(f.frecuenciaIa, r.frecuenciaIa)) return false;
   if (!pasaMultiSelect(f.dependencia, r.dependencia)) return false;
   if (!pasaMultiSelect(f.integrarIa, r.integrarIa)) return false;

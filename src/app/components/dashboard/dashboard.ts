@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { collection, getDocs } from 'firebase/firestore';
 import { ChartData, ChartOptions } from 'chart.js';
@@ -47,7 +47,8 @@ function contarOpciones(
 ): { labels: string[]; valores: number[] } {
   const conteo = new Map<string, number>();
   for (const r of respuestas) {
-    const valor = r[campo] as unknown as string;
+    const raw = r[campo];
+    const valor = typeof raw === 'boolean' ? String(raw) : (raw as unknown as string);
     if (valor) conteo.set(valor, (conteo.get(valor) ?? 0) + 1);
   }
   return {
@@ -482,4 +483,13 @@ export class Dashboard implements OnInit {
       this.cargando.set(false);
     }
   }
+
+      cerrarPanelDatos() {
+      this.panelDatosAbierto.set(false);
+    }
+
+    @HostListener('document:keydown.escape')
+    onEscape() {
+      if (this.panelDatosAbierto()) this.cerrarPanelDatos();
+    }
 }

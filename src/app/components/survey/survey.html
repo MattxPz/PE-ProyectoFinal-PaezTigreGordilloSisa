@@ -184,8 +184,8 @@
             </label>
             <div class="option-label-inline">
               <label>
-                <input type="radio" name="situacion" value="Otra" 
-                      [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
+              <input type="radio" name="situacion" value="Otro" 
+                [(ngModel)]="situacionSeleccionada" (change)="onSituacionChange()"> Otra:
               </label>
               <input type="text" class="input-text" placeholder="Especifique..."
                     name="otraSituacionTexto"
@@ -252,8 +252,11 @@
         <div class="question-group">
           <p class="question-text">10. ¿Utiliza herramientas de Inteligencia Artificial para actividades académicas?</p>
           <div class="options-container">
-            <label class="option-label"><input type="radio" name="utiliza_ia" value="Sí" [(ngModel)]="utilizaIa"> Sí</label>
-            <label class="option-label"><input type="radio" name="utiliza_ia" value="No" [(ngModel)]="utilizaIa"> No</label>
+
+
+            <label class="option-label"><input type="radio" name="utiliza_ia" [value]="true" [(ngModel)]="utilizaIa"> Sí</label>
+            <label class="option-label"><input type="radio" name="utiliza_ia" [value]="false" [(ngModel)]="utilizaIa"> No</label>
+
           </div>
         </div>
 
@@ -386,7 +389,7 @@
           <div class="options-container">
             <label class="option-label"><input type="radio" name="dependencia" value="Sí" [(ngModel)]="dependencia"> Sí</label>
             <label class="option-label"><input type="radio" name="dependencia" value="No" [(ngModel)]="dependencia"> No</label>
-            <label class="option-label"><input type="radio" name="dependencia" value="Tal vez" [(ngModel)]="dependencia"> Tal vez</label>
+            <label class="option-label"><input type="radio" name="dependencia" value="Talvez" [(ngModel)]="dependencia"> Tal vez</label>
           </div>
         </div>
       </div>
@@ -404,8 +407,7 @@
                     [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Ingenierías
             </label>
             <label class="option-label">
-              <input type="radio" name="area_academica" value="Diseno y Multimedia"
-                    [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Diseño y Multimedia
+                    <input type="radio" name="area_academica" value="Diseño y Multimedia" [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Diseño y Multimedia
             </label>
             <label class="option-label">
               <input type="radio" name="area_academica" value="Ciencias Sociales"
@@ -416,8 +418,7 @@
                     [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Medicina
             </label>
             <label class="option-label">
-              <input type="radio" name="area_academica" value="Administracion"
-                    [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Administración
+            <input type="radio" name="area_academica" value="Administración" [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Administración
             </label>
             <label class="option-label">
               <input type="radio" name="area_academica" value="Arquitectura"
@@ -425,13 +426,12 @@
             </label>
             <div class="option-label-inline">
               <label>
-                <input type="radio" name="area_academica" value="Otra" 
-                      [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Otra:
+              <input type="radio" name="area_academica" value="Otro" [(ngModel)]="areaSeleccionada" (change)="onAreaChange()"> Otra:
               </label>
               <input type="text" class="input-text" placeholder="Especifique..."
                     name="otraAreaTexto"
                     [(ngModel)]="otraAreaTexto"
-                    [disabled]="areaSeleccionada !== 'Otra'">
+                    [disabled]="areaSeleccionada !== 'Otro'">
             </div>
           </div>
         </div>
@@ -485,8 +485,11 @@
             </label>
             <div class="option-label-inline">
               <label>
-                <input type="radio" name="aspecto_positivo" value="Otra" 
-                      [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Otra:
+
+
+
+
+                <input type="radio" name="aspecto_positivo" value="Otro" [(ngModel)]="aspectoPositivoSeleccionado" (change)="onAspectoPositivoChange()"> Otra:
               </label>
               <input type="text" class="input-text" placeholder="Especifique..."
                     name="otroAspectoPositivoTexto"
@@ -525,8 +528,7 @@
             </label>
             <div class="option-label-inline">
               <label>
-                <input type="radio" name="aspecto_negativo" value="Otra" 
-                      [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Otra:
+                <input type="radio" name="aspecto_negativo" value="Otro" [(ngModel)]="aspectoNegativoSeleccionado" (change)="onAspectoNegativoChange()"> Otra:
               </label>
               <input type="text" class="input-text" placeholder="Especifique..."
                     name="otroAspectoNegativoTexto"

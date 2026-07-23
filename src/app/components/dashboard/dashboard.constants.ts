@@ -18,7 +18,7 @@ export interface RespuestaEncuesta {
   horasOcio: string;
   horasSueno: string;
 
-  utilizaIa: string;
+  utilizaIa: boolean;
   frecuenciaIa: string;
   ahorroTiempo: string;
 
@@ -64,7 +64,7 @@ export const SEMESTRE_OPCIONES: OpcionEtiquetada[] = [
   { value: '10', label: '10mo ciclo' },
 ];
 
-export const SITUACION_OPCIONES: Opcion[] = ['Solo estudio', 'Estudio y trabajo', 'Solo trabajo', 'Otra'];
+export const SITUACION_OPCIONES: Opcion[] = ['Solo estudio', 'Estudio y trabajo', 'Solo trabajo', 'Otro'];
 
 /** Mismo catálogo del <select> de carrera en el formulario de la encuesta (survey.html). */
 export const CARRERA_OPCIONES: Opcion[] = [
@@ -85,7 +85,10 @@ export const HORAS_TRABAJO_OPCIONES: Opcion[] = ['No trabajo', '1-3 horas', '4-6
 export const HORAS_OCIO_OPCIONES: Opcion[] = ['Menos de 1 hora', '1-2 horas', '3-4 horas', 'Más de 4 horas'];
 export const HORAS_SUENO_OPCIONES: Opcion[] = ['Menos de 4 horas', '4-5 horas', '6-7 horas', '8 horas o más'];
 
-export const UTILIZA_IA_OPCIONES: Opcion[] = ['Sí', 'No'];
+export const UTILIZA_IA_OPCIONES: OpcionEtiquetada[] = [
+  { value: 'true', label: 'Sí' },
+  { value: 'false', label: 'No' },
+];
 export const FRECUENCIA_IA_OPCIONES: Opcion[] = ['Nunca', 'Rara vez', 'Algunas veces por semana', 'Casi todos los días', 'Todos los días'];
 
 export const LIKERT_OPCIONES: OpcionEtiquetada[] = [
@@ -124,28 +127,28 @@ export const PROPOSITOS_LABELS: { key: PropositoKey; label: string }[] = [
 
 export const AGOTAMIENTO_OPCIONES: Opcion[] = ['Nunca', 'Rara vez', 'Algunas veces', 'Frecuentemente', 'Siempre'];
 export const COMPRENSION_IA_OPCIONES: Opcion[] = ['Nunca', 'Rara vez', 'Algunas veces', 'Frecuentemente', 'Siempre'];
-export const DEPENDENCIA_OPCIONES: Opcion[] = ['Sí', 'No', 'Tal vez'];
+export const DEPENDENCIA_OPCIONES: Opcion[] = ['Sí', 'No', 'Talvez'];
 
 export const AREA_OPCIONES: OpcionEtiquetada[] = [
   { value: 'Ingenierias', label: 'Ingenierías' },
-  { value: 'Diseno y Multimedia', label: 'Diseño y Multimedia' },
+  { value: 'Diseño y Multimedia', label: 'Diseño y Multimedia' },
   { value: 'Ciencias Sociales', label: 'Ciencias Sociales' },
   { value: 'Medicina', label: 'Medicina' },
-  { value: 'Administracion', label: 'Administración' },
+  { value: 'Administración', label: 'Administración' },
   { value: 'Arquitectura', label: 'Arquitectura' },
-  { value: 'Otra', label: 'Otra' },
+  { value: 'Otro', label: 'Otro' },
 ];
 
 export const INTEGRAR_IA_OPCIONES: Opcion[] = ['Sí', 'No', 'Parcialmente'];
 
 export const ASPECTO_POSITIVO_OPCIONES: Opcion[] = [
   'Ahorro de tiempo', 'Mayor comprensión', 'Automatización de tareas',
-  'Creatividad', 'Apoyo en programación', 'Generación rápida de contenido', 'Otra',
+  'Creatividad', 'Apoyo en programación', 'Generación rápida de contenido', 'Otro',
 ];
 
 export const ASPECTO_NEGATIVO_OPCIONES: Opcion[] = [
   'Dependencia', 'Menor razonamiento', 'Información incorrecta',
-  'Plagio académico', 'Menor esfuerzo personal', 'Distracción', 'Otra',
+  'Plagio académico', 'Menor esfuerzo personal', 'Distracción', 'Otro',
 ];
 
 /** Paleta categórica validada (orden fijo, nunca se reordena por gráfico). */

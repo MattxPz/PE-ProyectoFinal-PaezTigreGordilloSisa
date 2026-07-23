@@ -27,7 +27,7 @@
       <div class="filter-panel">
         <button class="filter-toggle" type="button" (click)="togglePanel()">
           <span class="filter-toggle-left">
-            <span class="filter-icon" aria-hidden="true">▤</span>
+            
             <span class="filter-toggle-text">Filtrar preguntas</span>
             <span class="filter-count" *ngIf="totalSeleccionadas() > 0">{{ totalSeleccionadas() }}/{{ totalPreguntas() }}</span>
             <span class="filter-count" *ngIf="totalSeleccionadas() === 0">Todas</span>
@@ -110,109 +110,124 @@
         </div>
       </div>
 
-      <!-- Panel de segmentación de datos (qué estudiantes se cuentan) -->
-      <div class="filter-panel filter-panel-datos">
-        <button class="filter-toggle" type="button" (click)="togglePanelDatos()">
-          <span class="filter-toggle-left">
-            <span class="filter-icon" aria-hidden="true">👥</span>
-            <span class="filter-toggle-text">Segmentar estudiantes</span>
-            <span class="filter-count" *ngIf="hayFiltrosDatosActivos()">{{ totalFiltradas() }}/{{ totalRespuestas() }}</span>
-          </span>
-          <span class="filter-chevron" [class.filter-chevron-open]="panelDatosAbierto()" aria-hidden="true">⌄</span>
-        </button>
 
-        <div class="filter-body" *ngIf="panelDatosAbierto()">
-          <div class="filter-toolbar">
-            <p class="filter-status-text" style="margin: 0;">
-              Filtra qué estudiantes se cuentan en los gráficos (ej. edad, género, horas de estudio). No afecta qué preguntas se muestran.
-            </p>
-            <div class="filter-actions">
-              <button type="button" class="filter-btn filter-btn-ghost" (click)="limpiarFiltrosDatos()" [disabled]="!hayFiltrosDatosActivos()">
-                Limpiar filtros
-              </button>
-            </div>
-          </div>
+      <!-- Botón para abrir el modal de filtros específicos -->
+<div class="filter-panel filter-panel-datos">
+  <button class="filter-toggle" type="button" (click)="togglePanelDatos()">
+    <span class="filter-toggle-left">
+      <span class="filter-toggle-text">Filtros específicos</span>
+      <span class="filter-count" *ngIf="hayFiltrosDatosActivos()">{{ totalFiltradas() }}/{{ totalRespuestas() }}</span>
+    </span>
+  </button>
+</div>
 
-          <p class="filter-status-text" *ngIf="camposActivosSegunSeleccion() !== null">
-            Mostrando solo los criterios relacionados con las preguntas seleccionadas arriba.
-          </p>
+<!-- Modal de filtros específicos -->
+<div class="modal-backdrop" *ngIf="panelDatosAbierto()" (click)="cerrarPanelDatos()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Filtros específicos</h2>
+      <button type="button" class="modal-close" (click)="cerrarPanelDatos()" aria-label="Cerrar">✕</button>
+    </div>
 
-          <p class="filter-sin-resultados" *ngIf="camposActivosSegunSeleccion() !== null && gruposFiltroVisibles().length === 0 && !semestreRelevante()">
-            Las preguntas seleccionadas no tienen criterios de segmentación asociados.
-          </p>
-
-          <div class="filter-datos-group" *ngFor="let grupo of gruposFiltroVisibles()">
-            <div class="filter-group-header-static">
-              {{ grupo.titulo }}
-              <span class="filter-count" *ngIf="cantidadActivaEnGrupo(grupo.campo) > 0">{{ cantidadActivaEnGrupo(grupo.campo) }}</span>
-            </div>
-
-            <input
-              *ngIf="grupo.buscador"
-              type="text"
-              class="filter-search filter-search-inline"
-              placeholder="Buscar carrera..."
-              [ngModel]="busquedaCarrera()"
-              (ngModelChange)="busquedaCarrera.set($event)"
-            />
-
-            <div class="filter-umbral" *ngIf="grupo.umbral">
-              <input
-                type="number"
-                min="0"
-                class="filter-umbral-input"
-                placeholder="N° horas"
-                [ngModel]="umbralInput(grupo.campo)"
-                (ngModelChange)="setUmbralInput(grupo.campo, $event)"
-              />
-              <button type="button" class="filter-btn filter-btn-ghost filter-btn-small" (click)="aplicarUmbral(grupo, 'menorQue')">
-                Menos de N horas
-              </button>
-              <button type="button" class="filter-btn filter-btn-ghost filter-btn-small" (click)="aplicarUmbral(grupo, 'mayorQue')">
-                Más de N horas
-              </button>
-            </div>
-
-            <div class="filter-chips">
-              <button
-                type="button"
-                class="filter-chip"
-                *ngFor="let opcion of grupo.opciones"
-                [hidden]="grupo.buscador && !coincideBusquedaCarrera(opcion.label)"
-                [class.filter-chip-active]="estaFiltroDatoActivo(grupo.campo, opcion.value)"
-                (click)="toggleFiltroDato(grupo.campo, opcion.value)"
-              >
-                {{ opcion.label }}
-              </button>
-            </div>
-          </div>
-
-          <div class="filter-datos-group" *ngIf="semestreRelevante()">
-            <div class="filter-group-header-static">Semestre actual (rango)</div>
-            <div class="filter-rango">
-              <input
-                type="number"
-                min="1"
-                max="10"
-                class="filter-umbral-input"
-                placeholder="Mín."
-                [ngModel]="filtrosDatos().semestreMin"
-                (ngModelChange)="setSemestreMin($event)"
-              />
-              <span>—</span>
-              <input
-                type="number"
-                min="1"
-                max="10"
-                class="filter-umbral-input"
-                placeholder="Máx."
-                [ngModel]="filtrosDatos().semestreMax"
-                (ngModelChange)="setSemestreMax($event)"
-              />
-            </div>
-          </div>
+    <div class="filter-body modal-body">
+      <div class="filter-toolbar">
+        <p class="filter-status-text" style="margin: 0;">
+          Filtra qué estudiantes se cuentan en los gráficos (ej. edad, género, horas de estudio). No afecta qué preguntas se muestran.
+        </p>
+        <div class="filter-actions">
+          <button type="button" class="filter-btn filter-btn-ghost" (click)="limpiarFiltrosDatos()" [disabled]="!hayFiltrosDatosActivos()">
+            Limpiar filtros
+          </button>
         </div>
       </div>
+
+      <p class="filter-status-text" *ngIf="camposActivosSegunSeleccion() !== null">
+        Mostrando solo los criterios relacionados con las preguntas seleccionadas arriba.
+      </p>
+
+      <p class="filter-sin-resultados" *ngIf="camposActivosSegunSeleccion() !== null && gruposFiltroVisibles().length === 0 && !semestreRelevante()">
+        Las preguntas seleccionadas no tienen criterios de segmentación asociados.
+      </p>
+
+      <div class="filter-datos-group" *ngFor="let grupo of gruposFiltroVisibles()">
+        <div class="filter-group-header-static">
+          {{ grupo.titulo }}
+          <span class="filter-count" *ngIf="cantidadActivaEnGrupo(grupo.campo) > 0">{{ cantidadActivaEnGrupo(grupo.campo) }}</span>
+        </div>
+
+        <input
+          *ngIf="grupo.buscador"
+          type="text"
+          class="filter-search filter-search-inline"
+          placeholder="Buscar carrera..."
+          [ngModel]="busquedaCarrera()"
+          (ngModelChange)="busquedaCarrera.set($event)"
+        />
+
+        <div class="filter-umbral" *ngIf="grupo.umbral">
+          <input
+            type="number"
+            min="0"
+            class="filter-umbral-input"
+            placeholder="N° horas"
+            [ngModel]="umbralInput(grupo.campo)"
+            (ngModelChange)="setUmbralInput(grupo.campo, $event)"
+          />
+          <button type="button" class="filter-btn filter-btn-ghost filter-btn-small" (click)="aplicarUmbral(grupo, 'menorQue')">
+            Menos de N horas
+          </button>
+          <button type="button" class="filter-btn filter-btn-ghost filter-btn-small" (click)="aplicarUmbral(grupo, 'mayorQue')">
+            Más de N horas
+          </button>
+        </div>
+
+        <div class="filter-chips">
+          <button
+            type="button"
+            class="filter-chip"
+            *ngFor="let opcion of grupo.opciones"
+            [hidden]="grupo.buscador && !coincideBusquedaCarrera(opcion.label)"
+            [class.filter-chip-active]="estaFiltroDatoActivo(grupo.campo, opcion.value)"
+            (click)="toggleFiltroDato(grupo.campo, opcion.value)"
+          >
+            {{ opcion.label }}
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-datos-group" *ngIf="semestreRelevante()">
+        <div class="filter-group-header-static">Semestre actual (rango)</div>
+        <div class="filter-rango">
+          <input
+            type="number"
+            min="1"
+            max="10"
+            class="filter-umbral-input"
+            placeholder="Mín."
+            [ngModel]="filtrosDatos().semestreMin"
+            (ngModelChange)="setSemestreMin($event)"
+          />
+          <span>—</span>
+          <input
+            type="number"
+            min="1"
+            max="10"
+            class="filter-umbral-input"
+            placeholder="Máx."
+            [ngModel]="filtrosDatos().semestreMax"
+            (ngModelChange)="setSemestreMax($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 
       <div class="dashboard-stat dashboard-stat-sub" *ngIf="hayFiltrosDatosActivos()">
         <span class="stat-value">{{ totalFiltradas() }}</span>
