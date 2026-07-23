@@ -79,12 +79,28 @@ function contarCheckboxGroup(
 }
 
 function contarCarreras(respuestas: RespuestaEncuesta[]): { labels: string[]; valores: number[] } {
-  const conteo = new Map<string, number>();
+  // clave: carrera normalizada (minúsculas) -> { label: variante más frecuente, count: total }
+  const grupos = new Map<string, { variantes: Map<string, number>; total: number }>();
+
   for (const r of respuestas) {
-    if (r.carrera) conteo.set(r.carrera, (conteo.get(r.carrera) ?? 0) + 1);
+    const c = r.carrera?.trim();
+    if (!c) continue;
+    const key = c.toLowerCase();
+    if (!grupos.has(key)) grupos.set(key, { variantes: new Map(), total: 0 });
+    const g = grupos.get(key)!;
+    g.total++;
+    g.variantes.set(c, (g.variantes.get(c) ?? 0) + 1);
   }
-  const entradas = [...conteo.entries()].sort((a, b) => b[1] - a[1]);
-  return { labels: entradas.map((e) => e[0]), valores: entradas.map((e) => e[1]) };
+
+  const entradas = [...grupos.values()]
+    .map((g) => {
+      // usa como etiqueta la variante de escritura más común dentro del grupo
+      const labelMasFrecuente = [...g.variantes.entries()].sort((a, b) => b[1] - a[1])[0][0];
+      return { label: labelMasFrecuente, total: g.total };
+    })
+    .sort((a, b) => b.total - a.total);
+
+  return { labels: entradas.map((e) => e.label), valores: entradas.map((e) => e.total) };
 }
 
 @Component({
