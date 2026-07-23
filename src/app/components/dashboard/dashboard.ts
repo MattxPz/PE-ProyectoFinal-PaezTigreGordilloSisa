@@ -321,6 +321,15 @@ export class Dashboard implements OnInit {
       .filter((s) => s.tarjetas.length > 0);
   });
 
+  carrerasDisponibles = computed<{ value: string; label: string }[]>(() => {
+    const set = new Set<string>();
+    for (const r of this.respuestas()) {
+      if (r.carrera && r.carrera.trim()) set.add(r.carrera.trim());
+    }
+    return [...set].sort((a, b) => a.localeCompare(b, 'es')).map((c) => ({ value: c, label: c }));
+  });
+
+
   /**
    * Campos de segmentación relevantes según las preguntas actualmente seleccionadas.
    * `null` = sin restricción (nada seleccionado → todas las preguntas se muestran, así
@@ -348,9 +357,11 @@ export class Dashboard implements OnInit {
     return activos === null || activos.has('semestre');
   }
 
-  gruposFiltroVisibles = computed<GrupoFiltroDatos[]>(() =>
-    this.gruposFiltroDatos.filter((g) => this.grupoRelevante(g.campo)),
-  );
+gruposFiltroVisibles = computed<GrupoFiltroDatos[]>(() =>
+  this.gruposFiltroDatos
+    .filter((g) => this.grupoRelevante(g.campo))
+    .map((g) => (g.campo === 'carrera' ? { ...g, opciones: this.carrerasDisponibles() } : g)),
+);
 
   estaSeleccionada(id: number): boolean {
     return this.seleccionadas().has(id);
